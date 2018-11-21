@@ -10,7 +10,7 @@
 #include <boost/tokenizer.hpp>
 #include <string>
 
-Base * Parse_It(boost::tokenizer<boost::char_separator<char> > tokenizer commands,boost::tokenizer<boost::char_separator<char> >::iterator it)
+Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost::tokenizer<boost::char_separator<char> >::iterator it)
 {
 	//The base that will be returned	
 	Base * res;
