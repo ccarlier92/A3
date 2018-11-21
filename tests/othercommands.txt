@@ -1,0 +1,6 @@
+echo hello #world
+echo hello world # && echo ok
+ls && echo true || ls -m ; echo test && ps
+# ls -m && echo world || echo hello
+ls || echo true && ls -m && ps; echo test ; exit
+

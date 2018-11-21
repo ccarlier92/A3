@@ -1,0 +1,9 @@
+echo hello
+echo hello world 
+ls
+ls -m 
+echo is this working ?
+echo I think so
+ls -k
+ps
+exit

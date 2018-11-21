@@ -1,0 +1,7 @@
+echo hello && echo people
+echo hello world && ls -m
+celine est nulle || echo celine is wrong
+ls -m ; echo is this working ? && echo I think so
+ls -k || echo invisible
+ps && celine est nulle || echo ok
+echo end ; exit
