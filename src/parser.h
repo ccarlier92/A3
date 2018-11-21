@@ -10,12 +10,13 @@
 #include <boost/tokenizer.hpp>
 #include <string>
 
-Base * Parse_It(boost::tokenizer<boost::char_separator<char> > tokenizer commands)
+Base * Parse_It(boost::tokenizer<boost::char_separator<char> > tokenizer commands,boost::tokenizer<boost::char_separator<char> >::iterator it)
 {
+	//The base that will be returned	
+	Base * res;
+	
 	std::vector<Command*> vect_commands;
 	std::vector<Connector*> vect_connectors;
-	
-	tokenizer::iterator it = commands.begin();
 	
 	bool valid_connector = true;		//Check if there are 2 characters for && and ||
 	
