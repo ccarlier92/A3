@@ -114,7 +114,7 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 			else if(actual_token == "(")
 			{
 				it++;
-				if(it != tokens.end())
+				if(it != commands.end())
 				{
 					Base * parenthesis = new Parenthesis(Parse_It(commands,it,true));
 					vect_commands.push_back(parenthesis);
