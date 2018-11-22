@@ -5,7 +5,7 @@ bool Parenthesis::execute(){
 }
 
 
-void And::print_args()
+void Parenthesis::print_args()
 {
 	std::cout<<" ( ";
   this->next->print_args()
