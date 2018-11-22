@@ -112,8 +112,9 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 			}	
 			else if(actual_token == "(")
 			{
-				Connector * parenthesis = new parenthesis(Parse_It(commands,it,true));
+				Connector * parenthesis = new Parenthesis(Parse_It(commands,it,true));
 				vect_connectors.push_back(connector);
+			}
 		}	
 			
 		if(it != commands.end() || (in_parenthesis && *it != ")"))
@@ -166,7 +167,7 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 }
 
 
-Base * Parse(std::string command_line)
+/*Base * Parse(std::string command_line)
 {
 	//The base that will be returned	
 	Base * res;
@@ -174,7 +175,7 @@ Base * Parse(std::string command_line)
 	//Call the tokenizer class
 	typedef boost::tokenizer<boost::char_separator<char> > tokenizer;
 
-	boost::char_separator<char> delimiters(" ","&|;#");	/*The blank will disappear in the parsed result but '&','|',';',and '#' will be keeped as token*/
+	boost::char_separator<char> delimiters(" ","&|;#");	/The blank will disappear in the parsed result but '&','|',';',and '#' will be keeped as token
 	tokenizer tokens(command_line,delimiters);		//split into tokens
 	
 	//To store the commands and connectors
@@ -324,5 +325,5 @@ Base * Parse(std::string command_line)
 		}
 	}
 	return res;
-}
+}*/
 
