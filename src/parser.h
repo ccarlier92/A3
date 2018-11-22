@@ -20,7 +20,7 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 	
 	bool valid_connector = true;		//Check if there are 2 characters for && and ||
 	
-	while( it != commands.end() || (in_parenthesis && it != ")"))				//Start parsing
+	while( it != commands.end() || (in_parenthesis && *it != ")"))				//Start parsing
 	{
 		std::string actual_token = *it;	
 		std::vector<std::string> args;
@@ -35,7 +35,7 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 				is_exit = true;
 			}
 			it++;
-			if(it != commands.end())
+			if(it != commands.end() || (in_parenthesis && *it != ")"))
 			{
 				actual_token = *it;
 			}
@@ -55,7 +55,7 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 		}
 
 
-		if(it != commands.end())
+		if(it != commands.end() || (in_parenthesis && *it != ")"))
 		{
 			//When a connector or comment token is reached
 			if(actual_token == "#")
@@ -70,7 +70,7 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 			if(actual_token == "&")
 			{	
 				it++;
-				if (it == commands.end())
+				if (it == commands.end() || (in_parenthesis && *it != ")"))
 				{
 					valid_connector = false;
 					break;
@@ -89,7 +89,7 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 			else if(actual_token == "|")
 			{
 				it++;
-				if (it == commands.end())
+				if (it == commands.end() || (in_parenthesis && *it != ")"))
 				{
 					valid_connector = false;
 					break;
@@ -109,10 +109,14 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 			{
 				Connector * connector = new SemiColon();
 				vect_connectors.push_back(connector);
-			}			
+			}	
+			else if(actual_token == "(")
+			{
+				Connector * parenthesis = new parenthesis(Parse_It(commands,it,true));
+				vect_connectors.push_back(connector);
 		}	
 			
-		if(it != commands.end())
+		if(it != commands.end() || (in_parenthesis && *it != ")"))
 		{
 			it++;
 		}
