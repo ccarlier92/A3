@@ -4,6 +4,11 @@
 #include "connector.h"
 
 class Or : public Connector{
+	
+	private:
+		Base * previous;
+		Base * next;
+	
 	public :
 		Or():Connector(){};
 		bool execute();
