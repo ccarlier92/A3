@@ -4,6 +4,10 @@
 #include "connector.h"
 
 class SemiColon : public Connector{
+	
+	private:
+		Base * previous;
+		Base * next;
 
 	public:
 		SemiColon():Connector(){};
