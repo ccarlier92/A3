@@ -75,6 +75,7 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 			{	
 				it++;
 				if (it == commands.end() || !(in_parenthesis && *it == ")"))
+				{
 					valid_connector = false;
 					break;
 				}
