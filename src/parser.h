@@ -120,7 +120,7 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 				it++;
 				if(it != commands.end())
 				{
-					std::cout<<"In Parenthesis"<<endl;
+					std::cout<<"In Parenthesis"<<std::endl;
 					Base * parenthesis = new Parenthesis(Parse_It(commands,it,true));
 					vect_commands.push_back(parenthesis);
 				}
