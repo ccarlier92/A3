@@ -21,7 +21,7 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 	
 	bool valid_connector = true;		//Check if there are 2 characters for && and ||
 	
-	while( it != commands.end() || (in_parenthesis && *it != ")"))				//Start parsing
+	while( it != commands.end() || (in_parenthesis && *it == ")"))				//Start parsing
 	{
 		std::string actual_token = *it;	
 		std::vector<std::string> args;
@@ -36,7 +36,7 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 				is_exit = true;
 			}
 			it++;
-			if(it != commands.end() || (in_parenthesis && *it != ")"))
+			if(it != commands.end() || (in_parenthesis && *it == ")"))
 			{
 				actual_token = *it;
 			}
@@ -56,7 +56,7 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 		}
 
 
-		if(it != commands.end() || (in_parenthesis && *it != ")"))
+		if(it != commands.end() || (in_parenthesis && *it == ")"))
 		{
 			//When a connector or comment token is reached
 			if(actual_token == "#")
@@ -71,7 +71,7 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 			if(actual_token == "&")
 			{	
 				it++;
-				if (it == commands.end() || (in_parenthesis && *it != ")"))
+				if (it == commands.end() || (in_parenthesis && *it == ")"))
 				{
 					valid_connector = false;
 					break;
@@ -90,7 +90,7 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 			else if(actual_token == "|")
 			{
 				it++;
-				if (it == commands.end() || (in_parenthesis && *it != ")"))
+				if (it == commands.end() || (in_parenthesis && *it == ")"))
 				{
 					valid_connector = false;
 					break;
@@ -113,9 +113,12 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 			}	
 			else if(actual_token == "(")
 			{
-				Base * parenthesis = new Parenthesis(Parse_It(commands,it,true));
-				vect_commands.push_back(parenthesis);
 				it++;
+				if(it != tokens.end())
+				{
+					Base * parenthesis = new Parenthesis(Parse_It(commands,it,true));
+					vect_commands.push_back(parenthesis);
+				}
 			}
 		}	
 			
