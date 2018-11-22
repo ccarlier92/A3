@@ -16,7 +16,7 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 	Base * res;
 	
 	std::vector<Base*> vect_commands;
-	std::vector<Connectors*> vect_connectors;
+	std::vector<Connector*> vect_connectors;
 	
 	bool valid_connector = true;		//Check if there are 2 characters for && and ||
 	
