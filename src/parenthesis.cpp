@@ -8,6 +8,6 @@ bool Parenthesis::execute(){
 void Parenthesis::print_args()
 {
 	std::cout<<" ( ";
-  this->next->print_args()
-  std::cout<<" )";
+  	this->child->print_args();
+  	std::cout<<" )";
 }
