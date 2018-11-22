@@ -1,11 +1,11 @@
 #ifndef PARENTHESIS_H
 #define PARENTHESIS_H
 
-#include "connector.h"
+#include "base.h"
 
 class Parenthesis : public Base{
-  private:
-    Base * child;
+  	private:
+    		Base * child;
     
 	public :
 		Parenthesis(Base * child): child(child),Base(){};
