@@ -21,7 +21,7 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 	
 	bool valid_connector = true;		//Check if there are 2 characters for && and ||
 	std::string tok = *it;
-	while( it != commands.end() || (in_parenthesis && *it != ")"))				//Start parsing
+	while( it != commands.end() && (in_parenthesis && *it != ")"))				//Start parsing
 	{
 		if(in_parenthesis)
 		{
@@ -41,7 +41,7 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 			}
 			it++;
 			tok = *it;
-			if(it != commands.end() || (in_parenthesis && tok != ")"))
+			if(it != commands.end() && (in_parenthesis && tok != ")"))
 			{
 				actual_token = *it;
 			}
@@ -61,7 +61,7 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 		}
 
 		tok = *it;
-		if(it != commands.end() || (in_parenthesis && tok != ")"))
+		if(it != commands.end() && (in_parenthesis && tok != ")"))
 		{
 			//When a connector or comment token is reached
 			if(actual_token == "#")
@@ -77,7 +77,7 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 			{	
 				it++;
 				tok =*it;
-				if (it == commands.end() || (in_parenthesis && tok != ")"))
+				if (it == commands.end() && (in_parenthesis && tok != ")"))
 				{
 					valid_connector = false;
 					break;
@@ -97,7 +97,7 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 			{
 				it++;
 				tok = *it;
-				if (it == commands.end() || (in_parenthesis && tok != ")"))
+				if (it == commands.end() && (in_parenthesis && tok != ")"))
 				{
 					valid_connector = false;
 					break;
@@ -130,7 +130,7 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 			}
 		}	
 		tok =*it;	
-		if(it != commands.end() || (in_parenthesis && tok != ")"))
+		if(it != commands.end() && (in_parenthesis && tok != ")"))
 		{
 			it++;
 		}
