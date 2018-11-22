@@ -6,6 +6,8 @@
 #include "or.cpp"
 #include "semiColon.cpp"
 #include "prompt.h"
+#include "parenthesis.cpp"
+
 int  main()
 {
 	int result = 0;
