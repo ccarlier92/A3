@@ -16,7 +16,7 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 	Base * res;
 	
 	std::vector<Command*> vect_commands;
-	std::vector<Connector*> vect_connectors;
+	std::vector<Base*> vect_connectors;
 	
 	bool valid_connector = true;		//Check if there are 2 characters for && and ||
 	
@@ -112,8 +112,8 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 			}	
 			else if(actual_token == "(")
 			{
-				Connector * parenthesis = new Parenthesis(Parse_It(commands,it,true));
-				vect_connectors.push_back(connector);
+				Base * parenthesis = new Parenthesis(Parse_It(commands,it,true));
+				vect_connectors.push_back(parenthesis);
 			}
 		}	
 			
