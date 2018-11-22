@@ -23,6 +23,10 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 	
 	while( it != commands.end() || (in_parenthesis && *it == ")"))				//Start parsing
 	{
+		if(in_parenthesis)
+		{
+			std::cout<<"Start Loop"<<std::endl;
+		}
 		std::string actual_token = *it;	
 		std::vector<std::string> args;
 		bool is_exit = false;			//Check if the command is exit or not
@@ -116,6 +120,7 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 				it++;
 				if(it != commands.end())
 				{
+					std::cout<<"In Parenthesis"<<endl;
 					Base * parenthesis = new Parenthesis(Parse_It(commands,it,true));
 					vect_commands.push_back(parenthesis);
 				}
