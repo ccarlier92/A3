@@ -115,6 +115,7 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 			{
 				Base * parenthesis = new Parenthesis(Parse_It(commands,it,true));
 				vect_commands.push_back(parenthesis);
+				it++;
 			}
 		}	
 			
