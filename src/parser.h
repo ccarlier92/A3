@@ -20,7 +20,7 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 	std::vector<Connector*> vect_connectors;
 	
 	bool valid_connector = true;		//Check if there are 2 characters for && and ||
-	std::string tok = *it;
+	
 	while( it != commands.end() || !(in_parenthesis && *it == ")"))				//Start parsing
 	{
 		if(in_parenthesis)
@@ -60,7 +60,6 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 			vect_commands.push_back(command);	//add the command to the vector
 		}
 
-		tok = *it;
 		if(it != commands.end() || !(in_parenthesis && *it == ")"))
 		{
 			//When a connector or comment token is reached
@@ -76,7 +75,6 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 			if(actual_token == "&")
 			{	
 				it++;
-				tok =*it;
 				if (it == commands.end() || !(in_parenthesis && *it == ")"))
 					valid_connector = false;
 					break;
@@ -95,7 +93,6 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 			else if(actual_token == "|")
 			{
 				it++;
-				tok = *it;
 				if (it == commands.end() || !(in_parenthesis && *it == ")"))
 				{
 					valid_connector = false;
@@ -127,8 +124,7 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 					vect_commands.push_back(parenthesis);
 				}
 			}
-		}	
-		tok =*it;	
+		}		
 		if(it != commands.end() || !(in_parenthesis && *it == ")"))
 		{
 			it++;
