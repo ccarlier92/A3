@@ -26,6 +26,7 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 		if(in_parenthesis)
 		{
 			std::cout<<"Start Loop"<<std::endl;
+			std::cout<<*it<<std::endl;
 		}
 		std::string actual_token = *it;	
 		std::vector<std::string> args;
