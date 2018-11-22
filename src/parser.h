@@ -10,7 +10,7 @@
 #include <boost/tokenizer.hpp>
 #include <string>
 
-Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost::tokenizer<boost::char_separator<char> >::iterator it)
+Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost::tokenizer<boost::char_separator<char> >::iterator it, bool in_parenthesis)
 {
 	//The base that will be returned	
 	Base * res;
@@ -20,7 +20,7 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 	
 	bool valid_connector = true;		//Check if there are 2 characters for && and ||
 	
-	while( it != commands.end())				//Start parsing
+	while( it != commands.end() || (in_parenthesis && it != ")"))				//Start parsing
 	{
 		std::string actual_token = *it;	
 		std::vector<std::string> args;
