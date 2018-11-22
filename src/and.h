@@ -5,10 +5,6 @@
 #include "connector.h"
 
 class And : public Connector{
-	private:
-	
-		Base * previous;
-		Base * next;
 	
 	public :
 		And():Connector(){};
