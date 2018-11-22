@@ -1,27 +1,27 @@
 #include "testCommand.h"
+#include <sys/types.h>
 #include <sys/stat.h>
-#include <filesystem>
-
-namespace fs = std::filesystem
+#include <unistd.h>
 
 bool Test::execute()
 {
   bool res = false;
+  struct stat buffer;   
   
   if(this->args[0] == NULL || this->args[0] == "-e")
   {
-    struct stat buffer;   
+    
     res = stat(this->args[1].c_str(), &buffer) == 0;
   }
   
   else if(this->args[0] == "-d")
   {
-    res = fs::is_directory(fs::status(this->args[1]));
+    res = S_ISDIR(buffer->st_mode);
   }
   
   else if(this->args[0] == "-f")
   {
-    res = fs::is_regular_file(fs::status(this->args[1]));
+    res = S_ISREG(buffer->st_mode);
   }
   
   else
