@@ -6,6 +6,7 @@
 #include "semiColon.h"
 #include "exit.h"
 #include "exit.cpp"
+#include "parenthesis.h"
 
 #include <boost/tokenizer.hpp>
 #include <string>
