@@ -165,7 +165,7 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 		res = NULL;
 		if (vect_connectors.size()!= (vect_commands.size()-1))
 		{
-			std::cout<<"Invalid Input"<<std::endl;
+			std::cout<<"Invalid Input"<<std::endl<<"connectors "<<vect_connectors.size() <<std::endl "commands "<<vect_commands.size()<<std::endl;
 		}
 		else if(valid_connector == false)
 		{
