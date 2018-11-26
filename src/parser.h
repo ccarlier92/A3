@@ -72,7 +72,7 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 			//if it is a connector ==> create it
 			//add it to the vector
 			//if & or | conectors, go to next iterator which will end up being skipped
-			if(actual_token == "&")
+			if(*it == "&")
 			{	
 				it++;
 				if (it == commands.end() && !(in_parenthesis && *it == ")"))
@@ -91,7 +91,7 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 					vect_connectors.push_back(connector);
 				}
 			}
-			else if(actual_token == "|")
+			else if(*it == "|")
 			{
 				it++;
 				if (it == commands.end() && !(in_parenthesis && *it == ")"))
@@ -110,12 +110,12 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 					vect_connectors.push_back(connector);
 				}
 			}
-			else if(actual_token == ";")
+			else if(*it == ";")
 			{
 				Connector * connector = new SemiColon();
 				vect_connectors.push_back(connector);
 			}	
-			else if(actual_token == "(")
+			else if(*it == "(")
 			{
 				it++;
 				if(it != commands.end())
