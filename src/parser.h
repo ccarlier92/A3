@@ -38,10 +38,10 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 			{
 				is_exit = true;
 			}
-			if(in_parenthesis)
+			/*if(in_parenthesis)
 			{
 				std::cout<<*it << std::endl;
-			}
+			}*/
 			it++;
 		}
 		if(args.size() != 0)			//Check if it was not a single command or not
@@ -54,7 +54,7 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 			else
 			{
 				command = new Command(args);
-				command->print_args();
+				//command->print_args();
 			}
 			vect_commands.push_back(command);	//add the command to the vector
 		}
@@ -170,10 +170,10 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 			std::cout<<"Invalid Input"<<std::endl;
 			std::cout<<"connectors "<<vect_connectors.size() <<std::endl;
 			std::cout<< "commands "<<vect_commands.size()<<std::endl;
-			for(int i=0;i< vect_commands.size();i++)
+			/*for(int i=0;i< vect_commands.size();i++)
 			{
 				vect_commands[i]->print_args();
-			}
+			}*/
 		}
 		else if(valid_connector == false)
 		{
