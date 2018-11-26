@@ -171,7 +171,6 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 			for(int i=0;i< vect_commands.size();i++)
 			{
 				vect_commands[i]->print_args();
-				std::endl;
 			}
 		}
 		else if(valid_connector == false)
