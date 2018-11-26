@@ -34,8 +34,8 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 		//This loop gets a command, the executable and its arguments
 		while((it != commands.end()) && (( *it != "&") && (*it != "|") && (*it != ";") && (*it != "#") && (*it != "(" ) && (*it != ")" ) ))
 		{
-			args.push_back(actual_token);
-			if(actual_token == "exit" )	//if it is an exit command
+			args.push_back(*it);
+			if(*it == "exit" )	//if it is an exit command
 			{
 				is_exit = true;
 			}
