@@ -44,10 +44,6 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 				std::cout<<*it<< actual_token << std::endl;
 			}
 			it++;
-			if(it != commands.end() && !(in_parenthesis && *it == ")" ))
-			{
-				actual_token = *it;
-			}
 		}
 		if(args.size() != 0)			//Check if it was not a single command or not
 		{
@@ -59,6 +55,7 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 			else
 			{
 				command = new Command(args);
+				command->print_args();
 			}
 			vect_commands.push_back(command);	//add the command to the vector
 		}
