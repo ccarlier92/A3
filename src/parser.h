@@ -41,7 +41,7 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 			}
 			if(in_parenthesis)
 			{
-				std::cout<<*it<<std::endl;
+				std::cout<<*it<< actual_token << std::endl;
 			}
 			it++;
 			if(it != commands.end() && !(in_parenthesis && *it == ")" ))
