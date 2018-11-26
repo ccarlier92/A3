@@ -26,13 +26,12 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 		if(in_parenthesis)
 		{
 			std::cout<<"Start Loop"<<std::endl;
-		}
-		std::string actual_token = *it;	
+		}	
 		std::vector<std::string> args;
 		bool is_exit = false;			//Check if the command is exit or not
 		
 		//This loop gets a command, the executable and its arguments
-		while((it != commands.end()) && (( *it != "&") && (*it != "|") && (*it != ";") && (*it != "#") && (*it != "(" ) && (*it != ")" ) ))
+		while((it != commands.end()) && ( *it != "&" && *it != "|" && *it != ";" && *it != "#" && *it != "("  && *it != ")"  ))
 		{
 			args.push_back(*it);
 			if(*it == "exit" )	//if it is an exit command
@@ -41,7 +40,7 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 			}
 			if(in_parenthesis)
 			{
-				std::cout<<*it<< actual_token << std::endl;
+				std::cout<<*it << std::endl;
 			}
 			it++;
 		}
@@ -63,7 +62,7 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 		if(it != commands.end() && !(in_parenthesis && *it == ")"))
 		{
 			//When a connector or comment token is reached
-			if(actual_token == "#")
+			if(*it == "#")
 			{
 				//Don't need what's next so break
 				break;
@@ -124,6 +123,7 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 					Base * parenthesis = new Parenthesis(Parse_It(commands,it,true));
 					vect_commands.push_back(parenthesis);
 				}
+				it++;
 			}
 		}		
 		if(it != commands.end() && !(in_parenthesis && *it == ")"))
