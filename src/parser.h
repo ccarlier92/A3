@@ -73,13 +73,14 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 			//if & or | conectors, go to next iterator which will end up being skipped
 			if(*it == "&")
 			{	
+				std::string prev_connector =*it;
 				it++;
 				if (it == commands.end() && !(in_parenthesis && *it == ")"))
 				{
 					valid_connector = false;
 					break;
 				}
-				else if (actual_token != *it)
+				else if (prev_connector != *it)
 				{
 					valid_connector = false;
 					break;
@@ -92,13 +93,14 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 			}
 			else if(*it == "|")
 			{
+				std::string prev_connector = *it;
 				it++;
 				if (it == commands.end() && !(in_parenthesis && *it == ")"))
 				{
 					valid_connector = false;
 					break;
 				}
-				else if (actual_token != *it)
+				else if (prev_connector != *it)
 				{
 					valid_connector = false;
 					break;
