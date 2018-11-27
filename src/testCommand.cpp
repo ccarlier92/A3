@@ -31,7 +31,8 @@ bool Test::execute()
 
 			else
 			{
-				std::cout<<"Invalid input"<<std::endl;
+				
+				std::cout<<"Invalid input"<<std::endl<<args[1]<<std::endl;
 			}  
 		}
 	}
