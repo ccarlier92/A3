@@ -23,6 +23,7 @@ Base * Parse_command (boost::tokenizer<boost::char_separator<char> > commands , 
 	while((it != commands.end()) && ( *it != "&" && *it != "|" && *it != ";" && *it != "#" && *it != "("  && *it != ")" && *it != "[" ))
 	{
 		args.push_back(*it);
+		std::cout<<*it<<std::endl;
 		if(*it == "exit" )	//if it is an exit command
 		{
 			is_exit = true;
