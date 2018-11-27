@@ -13,7 +13,7 @@
 #include <string>
 
 
-Base * Parse_command (boost::tokenizer<boost::char_separator<char> > commands , boost::tokenizer<boost::char_separator<char> >::iterator &it)
+/*Base * Parse_command (boost::tokenizer<boost::char_separator<char> > commands , boost::tokenizer<boost::char_separator<char> >::iterator &it)
 {				   
 	std::vector<std::string> args;
 	bool is_exit = false;			//Check if the command is exit or not
@@ -53,9 +53,9 @@ Base * Parse_command (boost::tokenizer<boost::char_separator<char> > commands , 
 		}
 	}
 	return command;	
-}
+}*/
 				   
-Base * Parse_test(boost::tokenizer<boost::char_separator<char> > commands , boost::tokenizer<boost::char_separator<char> >::iterator &it)
+/*Base * Parse_test(boost::tokenizer<boost::char_separator<char> > commands , boost::tokenizer<boost::char_separator<char> >::iterator &it)
 {	
 	it++;
 	std::vector<std::string> args;
@@ -66,7 +66,7 @@ Base * Parse_test(boost::tokenizer<boost::char_separator<char> > commands , boos
 	}
 	Base * test = new Test(args);
 	return test;
-}
+}*/
 
 
 Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost::tokenizer<boost::char_separator<char> >::iterator it, bool in_parenthesis)
@@ -83,9 +83,9 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 	{
 		
 		
-		vect_commands.push_back(Parse_command(commands,it));
-		std::cout<<*it<<std::endl;
-		/*std::vector<std::string> args;
+		//vect_commands.push_back(Parse_command(commands,it));
+		//std::cout<<*it<<std::endl;
+		std::vector<std::string> args;
 		bool is_test = false;
 		bool is_exit = false;			//Check if the command is exit or not
 		
@@ -123,7 +123,7 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 				command->print_args();
 			}
 			vect_commands.push_back(command);
-		}*/
+		}
 
 		if(it != commands.end() && !(in_parenthesis && *it == ")"))
 		{
@@ -137,8 +137,17 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 			if(*it == "[")
 			{
 				std::cout<<"Test"<<std::endl;
-				vect_commands.push_back(Parse_test(commands,it));
-				std::cout<<*it<<std::endl;
+				it++;
+				std::vector<std::string> args;
+				while(it != commands.end() && *it != "]")
+				{
+					args.push_back(*it);
+					it++;
+				}
+				Base * test = new Test(args);
+				vect_commands.push_back(test);	
+				//vect_commands.push_back(Parse_test(commands,it));
+				//std::cout<<*it<<std::endl;
 			}
 			
 			//if it is a connector ==> create it
