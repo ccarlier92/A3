@@ -138,8 +138,8 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 				std::cout<<"Test"<<std::endl;
 				it++;
 				std::vector<std::string> args;
-				std::string test = "test";
-				args.push_back(test);
+				std::string test_arg = "test";
+				args.push_back(test_arg);
 				while(it != commands.end() && *it != "]")
 				{
 					args.push_back(*it);
