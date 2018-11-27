@@ -53,7 +53,7 @@ bool Test::is_flag(char* value)
 	if(value != NULL)
 	{
 		std::cout <<value[0]<<std::endl;
-	  	if( value[0] == "-")
+	  	if( value[0] == '-')
 		{
 			res = true;
 		}
