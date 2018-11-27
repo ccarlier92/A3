@@ -29,7 +29,7 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 			std::cout<<"Start Loop"<<std::endl;
 		}
 		
-		Parse_commands(commands,it,vect_commands);
+		vect_commands.push_back(Parse_commands(commands,it);
 		/*std::vector<std::string> args;
 		bool is_exit = false;			//Check if the command is exit or not
 		
@@ -67,9 +67,9 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 				break;
 			}
 			
-			if(*it == [)
+			if(*it == "[")
 			{
-				Parse_test(commands,it,vect_commands));
+				vect_commands.push_back(Parse_test(commands,it));
 			}
 			
 			//if it is a connector ==> create it
@@ -188,7 +188,7 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 }
 				   
 				   
-Base * Parse_command (boost::tokenizer<boost::char_separator<char> > commands , boost::tokenizer<boost::char_separator<char> >::iterator it,std::vector<Command> vect_commands)
+Base * Parse_command (boost::tokenizer<boost::char_separator<char> > commands , boost::tokenizer<boost::char_separator<char> >::iterator it)
 {				   
 	std::vector<std::string> args;
 	bool is_exit = false;			//Check if the command is exit or not
