@@ -7,7 +7,7 @@
 #include <iostream>
 
 class Command : public Base{
-	private:
+	protected:
 		char ** args;
 		int length;
 	public :
