@@ -8,7 +8,7 @@ bool Test::execute()
 {
   	int res = -1;
   	struct stat buffer;   
-	char * f = "-f";
+	char [] f = "-f";
 	if(args[2] == NULL || (is_flag(args[1]) && args[1] == "-e"))
 	{
 		if(stat(args[1], &buffer) == 0)
