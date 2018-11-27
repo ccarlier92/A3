@@ -30,6 +30,6 @@ bool Test::execute()
     return(false);
   }
   
-std::cout<<"("<<res<<")"<<std::end;
+std::cout<<"("<<res<<")"<<std::endl;
 return(res);
 }
