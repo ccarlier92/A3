@@ -12,6 +12,73 @@
 #include <boost/tokenizer.hpp>
 #include <string>
 
+
+Base * Parse_command (boost::tokenizer<boost::char_separator<char> > commands , boost::tokenizer<boost::char_separator<char> >::iterator it)
+{				   
+	std::vector<std::string> args;
+	bool is_exit = false;			//Check if the command is exit or not
+	bool is_test = false;
+	Command * command;
+	//This loop gets a command, the executable and its arguments
+	while((it != commands.end()) && ( *it != "&" && *it != "|" && *it != ";" && *it != "#" && *it != "("  && *it != ")" && *it != "[" ))
+	{
+		args.push_back(*it);
+		if(*it == "exit" )	//if it is an exit command
+		{
+			is_exit = true;
+		}
+		else if(*it == "test" )	//if it is a test command
+		{
+			is_test = true;
+		}
+		it++;
+	}
+																       
+	if(args.size() != 0)			//Check if it was not a single command, a test, or an exit
+	{
+		if(is_exit == true)
+		{
+			command = new Exit(args);	
+		}
+		else if (is_test == true)
+		{
+			command = new Test(args);
+		}
+		else
+		{
+			command = new Command(args);
+			//command->print_args();
+		}
+	}
+	return command;	
+}
+				   
+Base * Parse_test(boost::tokenizer<boost::char_separator<char> > commands , boost::tokenizer<boost::char_separator<char> >::iterator it)
+{	
+	it++;
+	std::vector<std::string> args;
+	while(it != commands.end() && *it != "]")
+	{
+		args.push_back(*it);
+		it++;
+	}
+	Base * test = new Test(args);
+	return test;
+}
+
+bool is_flag(std::string value)
+{
+	bool res = false;
+	if(value.empty() == false)
+	{
+		if(value.size() == 2 && value[0] == '-')
+		{
+			res = true;
+		}
+	}
+}
+
+
 Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost::tokenizer<boost::char_separator<char> >::iterator it, bool in_parenthesis)
 {
 	//The base that will be returned	
@@ -188,70 +255,7 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 }
 				   
 				   
-Base * Parse_command (boost::tokenizer<boost::char_separator<char> > commands , boost::tokenizer<boost::char_separator<char> >::iterator it)
-{				   
-	std::vector<std::string> args;
-	bool is_exit = false;			//Check if the command is exit or not
-	bool is_test = false;
-	Command * command;
-	//This loop gets a command, the executable and its arguments
-	while((it != commands.end()) && ( *it != "&" && *it != "|" && *it != ";" && *it != "#" && *it != "("  && *it != ")" && *it != "[" ))
-	{
-		args.push_back(*it);
-		if(*it == "exit" )	//if it is an exit command
-		{
-			is_exit = true;
-		}
-		else if(*it == "test" )	//if it is a test command
-		{
-			is_test = true;
-		}
-		it++;
-	}
-																       
-	if(args.size() != 0)			//Check if it was not a single command, a test, or an exit
-	{
-		if(is_exit == true)
-		{
-			command = new Exit(args);	
-		}
-		else if (is_test == true)
-		{
-			command = new Test(args);
-		}
-		else
-		{
-			command = new Command(args);
-			//command->print_args();
-		}
-	}
-	return command;	
-}
-				   
-Base * Parse_test(boost::tokenizer<boost::char_separator<char> > commands , boost::tokenizer<boost::char_separator<char> >::iterator it)
-{	
-	it++;
-	std::vector<std::string> args;
-	while(it != commands.end() && *it != "]")
-	{
-		args.push_back(*it);
-		it++;
-	}
-	Base * test = new Test(args);
-	return test;
-}
 
-bool is_flag(std::string value)
-{
-	bool res = false;
-	if(value.empty() == false)
-	{
-		if(value.size() == 2 && value[0] == '-')
-		{
-			res = true;
-		}
-	}
-}
 /*Base * Parse(std::string command_line)
 {
 	//The base that will be returned	
