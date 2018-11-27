@@ -57,5 +57,6 @@ bool Test::is_flag(char* value)
 			res = true;
 		}
 	}
+	std::cout<<value<<" is not a flag"<<std::endl;
   	return res;
 }
