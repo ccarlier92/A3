@@ -1,3 +1,4 @@
+#include "parser.h"
 #include "testCommand.h"
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -8,9 +9,8 @@ bool Test::execute()
   bool res = false;
   struct stat buffer;   
   
-  if(this->args[0] == NULL || this->args[0] == "-e")
+  if(is_flag(this->args[0]) == false || this->args[0] == "-e")
   {
-    
     res = stat(this->args[1].c_str(), &buffer) == 0;
   }
   
