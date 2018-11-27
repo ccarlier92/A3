@@ -1,7 +1,6 @@
 #ifndef TESTCOMMAND_H
 #define TESTCOMMAND_H
 
-#include <string>
 #include "command.h"
 
 class Test : public Command{
