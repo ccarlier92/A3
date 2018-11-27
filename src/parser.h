@@ -42,6 +42,7 @@ Base * Parse_command (boost::tokenizer<boost::char_separator<char> > commands , 
 		}
 		else if (is_test == true)
 		{
+			std::cout<<"Test"<<std::endl;
 			command = new Test(args);
 		}
 		else
@@ -124,6 +125,7 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 			
 			if(*it == "[")
 			{
+				std::cout<<"Test"<<std::endl;
 				vect_commands.push_back(Parse_test(commands,it));
 			}
 			
