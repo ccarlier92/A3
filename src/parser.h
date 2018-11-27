@@ -7,6 +7,7 @@
 #include "exit.h"
 #include "exit.cpp"
 #include "parenthesis.h"
+#include "testCommand.h"
 
 #include <boost/tokenizer.hpp>
 #include <string>
@@ -31,7 +32,7 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 		bool is_exit = false;			//Check if the command is exit or not
 		
 		//This loop gets a command, the executable and its arguments
-		while((it != commands.end()) && ( *it != "&" && *it != "|" && *it != ";" && *it != "#" && *it != "("  && *it != ")"  ))
+		while((it != commands.end()) && ( *it != "&" && *it != "|" && *it != ";" && *it != "#" && *it != "("  && *it != ")" && *it != [ ))
 		{
 			args.push_back(*it);
 			if(*it == "exit" )	//if it is an exit command
@@ -66,6 +67,11 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 			{
 				//Don't need what's next so break
 				break;
+			}
+			
+			if(*it == [)
+			{
+				Parse_test(it);
 			}
 			
 			//if it is a connector ==> create it
@@ -182,8 +188,27 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 	}
 	return res;
 }
+				   
+Base * Parse_test(boost::tokenizer<boost::char_separator<char> > commands , boost::tokenizer<boost::char_separator<char> >::iterator it)
+{	
+	std::vector<std::string> args;
+	while(it != commands.end() && *it != ])
+	{
+		args.push_back(it);
+	}	
+}
 
-
+bool is_flag(std::string value)
+{
+	bool res = false;
+	if(value.empty() == false)
+	{
+		if(value.size() == 2 && value[0] =="-")
+		{
+			res= true;
+		}
+	}
+}
 /*Base * Parse(std::string command_line)
 {
 	//The base that will be returned	
