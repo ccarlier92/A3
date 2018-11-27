@@ -8,6 +8,7 @@ bool Test::execute()
 {
   	int res = -1;
   	struct stat buffer;   
+	char * f = "-f";
 	if(args[2] == NULL || (is_flag(args[1]) && args[1] == "-e"))
 	{
 		if(stat(args[1], &buffer) == 0)
@@ -24,7 +25,7 @@ bool Test::execute()
 				std::cout<<"test if "<<args[2] <<" is a directory"<<std::endl;
 				res = S_ISDIR(buffer.st_mode);
 			}
-			else if(args[1] == "-f\0")
+			else if(args[1] == f)
 			{
 				std::cout<<"test if "<<args[2] <<" is a file"<<std::endl;
 				res = S_ISREG(buffer.st_mode);
