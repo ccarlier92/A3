@@ -34,12 +34,12 @@ std::cout<<"("<<res<<")"<<std::endl;
 return(res);
 }
 
-bool Test::is_flag(std::string value)
+bool Test::is_flag(char* value)
 {
 	bool res = false;
-	if(value.empty() == false)
+	if(value != NULL)
 	{
-	  if(value.size() == 2 && value[0] == '-')
+	  if( value[0] == '-')
 		{
 			res = true;
 		}
