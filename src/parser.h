@@ -13,7 +13,7 @@
 #include <string>
 
 
-Base * Parse_command (boost::tokenizer<boost::char_separator<char> > commands , boost::tokenizer<boost::char_separator<char> >::iterator it)
+/*Base * Parse_command (boost::tokenizer<boost::char_separator<char> > commands , boost::tokenizer<boost::char_separator<char> >::iterator it)
 {				   
 	std::vector<std::string> args;
 	bool is_exit = false;			//Check if the command is exit or not
@@ -53,7 +53,7 @@ Base * Parse_command (boost::tokenizer<boost::char_separator<char> > commands , 
 		}
 	}
 	return command;	
-}
+}*/
 				   
 Base * Parse_test(boost::tokenizer<boost::char_separator<char> > commands , boost::tokenizer<boost::char_separator<char> >::iterator it)
 {	
@@ -87,33 +87,42 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 		}
 		
 		vect_commands.push_back(Parse_command(commands,it));
-		/*std::vector<std::string> args;
+		std::vector<std::string> args;
 		bool is_exit = false;			//Check if the command is exit or not
 		
 		//This loop gets a command, the executable and its arguments
-		while((it != commands.end()) && ( *it != "&" && *it != "|" && *it != ";" && *it != "#" && *it != "("  && *it != ")" && *it != [ ))
+		while((it != commands.end()) && ( *it != "&" && *it != "|" && *it != ";" && *it != "#" && *it != "("  && *it != ")" && *it != "[" ))
 		{
 			args.push_back(*it);
+			std::cout<<*it<<std::endl;
 			if(*it == "exit" )	//if it is an exit command
 			{
 				is_exit = true;
 			}
+			else if(*it == "test" )	//if it is a test command
+			{
+				is_test = true;
+			}
 			it++;
 		}
-		if(args.size() != 0)			//Check if it was not a single command or not
+
+		if(args.size() != 0)			//Check if it was not a single command, a test, or an exit
 		{
-			Command * command;
 			if(is_exit == true)
 			{
 				command = new Exit(args);	
 			}
+			else if (is_test == true)
+			{
+				std::cout<<"Test"<<std::endl;
+				command = new Test(args);
+			}
 			else
 			{
 				command = new Command(args);
-				//command->print_args();
+				command->print_args();
 			}
-			vect_commands.push_back(command);	//add the command to the vector
-		}*/
+		}
 
 		if(it != commands.end() && !(in_parenthesis && *it == ")"))
 		{
