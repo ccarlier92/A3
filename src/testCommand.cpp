@@ -37,7 +37,7 @@ bool Test::execute()
      return(false);
   }
   
-std::cout<<"("<<res<<")"<<std::endl;
+std::cout<<"( "<< res <<" )"<<std::endl;
 return(res);
 }
 
