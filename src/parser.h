@@ -29,7 +29,7 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 			std::cout<<"Start Loop"<<std::endl;
 		}
 		
-		vect_commands.push_back(Parse_command(commands,it);
+		vect_commands.push_back(Parse_command(commands,it));
 		/*std::vector<std::string> args;
 		bool is_exit = false;			//Check if the command is exit or not
 		
