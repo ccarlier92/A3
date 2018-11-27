@@ -223,9 +223,9 @@ Base * Parse_command (boost::tokenizer<boost::char_separator<char> > commands , 
 			command = new Command(args);
 			//command->print_args();
 		}
-		vect_commands.push_back(command);	//add the command to the vector
 	}
-}															       }
+	return command;	
+}
 				   
 Base * Parse_test(boost::tokenizer<boost::char_separator<char> > commands , boost::tokenizer<boost::char_separator<char> >::iterator it)
 {	
