@@ -24,7 +24,7 @@ bool Test::execute()
 				std::cout<<"test if "<<args[2] <<" is a directory"<<std::endl;
 				res = S_ISDIR(buffer.st_mode);
 			}
-			else if(args[1] == "-f")
+			else if(args[1] == "-f\0")
 			{
 				std::cout<<"test if "<<args[2] <<" is a file"<<std::endl;
 				res = S_ISREG(buffer.st_mode);
