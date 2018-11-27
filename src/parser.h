@@ -27,8 +27,10 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 		if(in_parenthesis)
 		{
 			std::cout<<"Start Loop"<<std::endl;
-		}	
-		std::vector<std::string> args;
+		}
+		
+		Parse(commands,it,vect_commands);
+		/*std::vector<std::string> args;
 		bool is_exit = false;			//Check if the command is exit or not
 		
 		//This loop gets a command, the executable and its arguments
@@ -39,10 +41,6 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 			{
 				is_exit = true;
 			}
-			/*if(in_parenthesis)
-			{
-				std::cout<<*it << std::endl;
-			}*/
 			it++;
 		}
 		if(args.size() != 0)			//Check if it was not a single command or not
@@ -58,7 +56,7 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 				//command->print_args();
 			}
 			vect_commands.push_back(command);	//add the command to the vector
-		}
+		}*/
 
 		if(it != commands.end() && !(in_parenthesis && *it == ")"))
 		{
@@ -188,6 +186,46 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 	}
 	return res;
 }
+				   
+				   
+Base * Parse_command (boost::tokenizer<boost::char_separator<char> > commands , boost::tokenizer<boost::char_separator<char> >::iterator it,std::vector<Command> vect_commands)
+{				   
+	std::vector<std::string> args;
+	bool is_exit = false;			//Check if the command is exit or not
+	bool is_test = false;
+	//This loop gets a command, the executable and its arguments
+	while((it != commands.end()) && ( *it != "&" && *it != "|" && *it != ";" && *it != "#" && *it != "("  && *it != ")" && *it != [ ))
+	{
+		args.push_back(*it);
+		if(*it == "exit" )	//if it is an exit command
+		{
+			is_exit = true;
+		}
+		else if(*it == "test" )	//if it is a test command
+		{
+			is_test = true;
+		}
+		it++;
+	}
+	if(args.size() != 0)			//Check if it was not a single command or not
+	{
+		Command * command;
+		if(is_exit == true)
+		{
+			command = new Exit(args);	
+		}
+		else if (is_test ==true)
+		{
+			command = new Test(args);
+		}
+		else
+		{
+			command = new Command(args);
+			//command->print_args();
+		}
+		vect_commands.push_back(command);	//add the command to the vector
+	}
+}															       }
 				   
 Base * Parse_test(boost::tokenizer<boost::char_separator<char> > commands , boost::tokenizer<boost::char_separator<char> >::iterator it)
 {	
