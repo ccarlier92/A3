@@ -37,11 +37,11 @@ bool Test::execute()
 	}
 	if(res == true)
 	{
-		std::cout<<"( "<< TRUE <<" )"<<std::endl;
+		std::cout<<"(TRUE)"<<std::endl;
 	}
 	else
 	{
-		std::cout<<"( "<< FALSE <<" )"<<std::endl;
+		std::cout<<"(FALSE)"<<std::endl;
 	}
 
 	return(res);
