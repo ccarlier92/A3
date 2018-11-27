@@ -9,7 +9,7 @@ bool Test::execute()
   bool res = false;
   struct stat buffer;   
   
-  if(is_flag(args[0]) == false || args[0] == "-e")
+  if(is_flag(args[1]) == false || args[2] == "-e")
   {
 	if(stat(args[1], &buffer) == 0)
 	{
@@ -21,12 +21,12 @@ bool Test::execute()
 	}
   }
   
-  else if(args[0] == "-d")
+  else if(args[1] == "-d")
   {
     res = S_ISDIR(buffer.st_mode);
   }
   
-  else if(args[0] == "-f")
+  else if(args[1] == "-f")
   {
     res = S_ISREG(buffer.st_mode);
   }
@@ -46,10 +46,10 @@ bool Test::is_flag(char* value)
 	bool res = false;
 	if(value != NULL)
 	{
-	  if( value[0] == '-')
+	  	if( value[0] == '-')
 		{
 			res = true;
 		}
 	}
-  return res;
+  	return res;
 }
