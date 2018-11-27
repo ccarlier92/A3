@@ -53,11 +53,14 @@ bool Test::is_flag(char* value)
 	if(value != NULL)
 	{
 		std::cout <<value[0]<<std::endl;
-	  	if( value[0] == '-')
+	  	if(value[0] == '-')
 		{
 			res = true;
 		}
 	}
-	std::cout<<value<<" is not a flag"<<std::endl;
+	if(res==false)
+	{
+		std::cout<<value<<" is not a flag"<<std::endl;
+	}
   	return res;
 }
