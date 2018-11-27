@@ -11,7 +11,7 @@ bool Test::execute()
   
   if(is_flag(this->args[0]) == false || this->args[0] == "-e")
   {
-    res = stat(this->args[1].c_str(), &buffer) == 0;
+    res = stat(this->args[1], &buffer) == 0;
   }
   
   else if(this->args[0] == "-d")
