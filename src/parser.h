@@ -29,7 +29,7 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 			std::cout<<"Start Loop"<<std::endl;
 		}
 		
-		Parse(commands,it,vect_commands);
+		Parse_commands(commands,it,vect_commands);
 		/*std::vector<std::string> args;
 		bool is_exit = false;			//Check if the command is exit or not
 		
@@ -69,7 +69,7 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 			
 			if(*it == [)
 			{
-				Parse_test(it);
+				Parse_test(commands,it,vect_commands));
 			}
 			
 			//if it is a connector ==> create it
@@ -229,11 +229,15 @@ Base * Parse_command (boost::tokenizer<boost::char_separator<char> > commands , 
 				   
 Base * Parse_test(boost::tokenizer<boost::char_separator<char> > commands , boost::tokenizer<boost::char_separator<char> >::iterator it)
 {	
+	it++;
 	std::vector<std::string> args;
 	while(it != commands.end() && *it != ])
 	{
 		args.push_back(it);
-	}	
+	}
+	it++;
+	Base * res = new Test(args);
+	return res;
 }
 
 bool is_flag(std::string value)
