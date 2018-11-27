@@ -207,14 +207,15 @@ Base * Parse_command (boost::tokenizer<boost::char_separator<char> > commands , 
 		}
 		it++;
 	}
-	if(args.size() != 0)			//Check if it was not a single command or not
+																       
+	if(args.size() != 0)			//Check if it was not a single command, a test, or an exit
 	{
 		Command * command;
 		if(is_exit == true)
 		{
 			command = new Exit(args);	
 		}
-		else if (is_test ==true)
+		else if (is_test == true)
 		{
 			command = new Test(args);
 		}
@@ -234,10 +235,10 @@ Base * Parse_test(boost::tokenizer<boost::char_separator<char> > commands , boos
 	while(it != commands.end() && *it != ])
 	{
 		args.push_back(it);
+		it++;
 	}
-	it++;
-	Base * res = new Test(args);
-	return res;
+	Base * test = new Test(args);
+	return test;
 }
 
 bool is_flag(std::string value)
