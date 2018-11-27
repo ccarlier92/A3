@@ -17,7 +17,7 @@ bool Test::execute()
 	}
 	else
 	{
-		if(is_flag(args[1])
+		if(is_flag(args[1]))
 		{
 			if(args[1] == "-d")
 			{
