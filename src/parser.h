@@ -234,7 +234,7 @@ Base * Parse_test(boost::tokenizer<boost::char_separator<char> > commands , boos
 	std::vector<std::string> args;
 	while(it != commands.end() && *it != "]")
 	{
-		args.push_back(it);
+		args.push_back(*it);
 		it++;
 	}
 	Base * test = new Test(args);
