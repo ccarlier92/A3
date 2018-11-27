@@ -38,7 +38,7 @@ bool Test::execute()
 	{
 		std::cout<<"(FALSE)"<<std::endl;
 	}
-	else
+	else if (res>0)
 	{
 		std::cout<<"(TRUE)"<<std::endl;
 	}
