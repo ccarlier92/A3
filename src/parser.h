@@ -232,7 +232,7 @@ Base * Parse_test(boost::tokenizer<boost::char_separator<char> > commands , boos
 {	
 	it++;
 	std::vector<std::string> args;
-	while(it != commands.end() && *it != ])
+	while(it != commands.end() && *it != "]")
 	{
 		args.push_back(it);
 		it++;
@@ -246,9 +246,9 @@ bool is_flag(std::string value)
 	bool res = false;
 	if(value.empty() == false)
 	{
-		if(value.size() == 2 && value[0] =="-")
+		if(value.size() == 2 && value[0] == '-')
 		{
-			res= true;
+			res = true;
 		}
 	}
 }
