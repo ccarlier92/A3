@@ -21,17 +21,17 @@ bool Test::execute()
 		{
 			if(args[1] == "-d")
 			{
-			res = S_ISDIR(buffer.st_mode);
+				res = S_ISDIR(buffer.st_mode);
 			}
 
 			else if(args[1] == "-f")
 			{
-			res = S_ISREG(buffer.st_mode);
+				res = S_ISREG(buffer.st_mode);
 			}
 
 			else
 			{
-			std::cout<<"Invalid input"<<std::endl;
+				std::cout<<"Invalid input"<<std::endl;
 			}  
 		}
 	}
@@ -52,7 +52,7 @@ bool Test::is_flag(char* value)
 	bool res = false;
 	if(value != NULL)
 	{
-		std::cout <<value[0]<<std::endl;
+		std::cout <<std::endl<<value[0]<<std::endl;
 	  	if(value[0] == '-')
 		{
 			res = true;
@@ -61,6 +61,10 @@ bool Test::is_flag(char* value)
 	if(res==false)
 	{
 		std::cout<<value<<" is not a flag"<<std::endl;
+	}
+	else
+	{
+		std::cout<<value<<" is a flag"<<std::endl;
 	}
   	return res;
 }
