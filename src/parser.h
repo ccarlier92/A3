@@ -143,6 +143,7 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 					it++;
 				}
 				Base * test = new Test(args);
+				test->print_args();
 				vect_commands.push_back(test);	
 				//vect_commands.push_back(Parse_test(commands,it));
 				//std::cout<<*it<<std::endl;
