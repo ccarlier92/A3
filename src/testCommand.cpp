@@ -6,13 +6,13 @@
 
 bool Test::execute()
 {
-  bool res = false;
+  int res = -1;
   struct stat buffer;   
 	if(args[2] == NULL || (is_flag(args[1]) && args[1] == "-e"))
 	{
 		if(stat(args[1], &buffer) == 0)
 		{
-		       res = true;
+		       res = 1;
 		}  
 	}
 	else
@@ -36,13 +36,13 @@ bool Test::execute()
 			}  
 		}
 	}
-	if(res == true)
+	if(res == 0)
 	{
-		std::cout<<"(TRUE)"<<std::endl;
+		std::cout<<"(FALSE)"<<std::endl;
 	}
 	else
 	{
-		std::cout<<"(FALSE)"<<std::endl;
+		std::cout<<"(TRUE)"<<std::endl;
 	}
 
 	return(res);
