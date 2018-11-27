@@ -193,6 +193,7 @@ Base * Parse_command (boost::tokenizer<boost::char_separator<char> > commands , 
 	std::vector<std::string> args;
 	bool is_exit = false;			//Check if the command is exit or not
 	bool is_test = false;
+	Command * command;
 	//This loop gets a command, the executable and its arguments
 	while((it != commands.end()) && ( *it != "&" && *it != "|" && *it != ";" && *it != "#" && *it != "("  && *it != ")" && *it != "[" ))
 	{
@@ -210,7 +211,6 @@ Base * Parse_command (boost::tokenizer<boost::char_separator<char> > commands , 
 																       
 	if(args.size() != 0)			//Check if it was not a single command, a test, or an exit
 	{
-		Command * command;
 		if(is_exit == true)
 		{
 			command = new Exit(args);	
