@@ -27,9 +27,22 @@ bool Test::execute()
   else
   {
      std::cout<<"Invalid input"<<std::endl;
-    return(false);
+     return(false);
   }
   
 std::cout<<"("<<res<<")"<<std::endl;
 return(res);
+}
+
+bool Test::is_flag(std::string value)
+{
+	bool res = false;
+	if(value.empty() == false)
+	{
+	  if(value.size() == 2 && value[0] == '-')
+		{
+			res = true;
+		}
+	}
+  return res;
 }
