@@ -13,7 +13,7 @@
 #include <string>
 
 
-Base * Parse_command (boost::tokenizer<boost::char_separator<char> > commands , boost::tokenizer<boost::char_separator<char> >::iterator it)
+Base * Parse_command (boost::tokenizer<boost::char_separator<char> > commands , boost::tokenizer<boost::char_separator<char> >::iterator &it)
 {				   
 	std::vector<std::string> args;
 	bool is_exit = false;			//Check if the command is exit or not
@@ -55,7 +55,7 @@ Base * Parse_command (boost::tokenizer<boost::char_separator<char> > commands , 
 	return command;	
 }
 				   
-Base * Parse_test(boost::tokenizer<boost::char_separator<char> > commands , boost::tokenizer<boost::char_separator<char> >::iterator it)
+Base * Parse_test(boost::tokenizer<boost::char_separator<char> > commands , boost::tokenizer<boost::char_separator<char> >::iterator &it)
 {	
 	it++;
 	std::vector<std::string> args;
