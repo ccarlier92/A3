@@ -7,6 +7,7 @@
 #include "semiColon.cpp"
 #include "prompt.h"
 #include "parenthesis.cpp"
+#include "testCommand.cpp"
 
 int  main()
 {
