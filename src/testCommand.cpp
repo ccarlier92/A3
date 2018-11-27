@@ -23,19 +23,17 @@ bool Test::execute()
 			{
 				res = S_ISDIR(buffer.st_mode);
 			}
-
 			else if(args[1] == "-f")
 			{
 				res = S_ISREG(buffer.st_mode);
 			}
-
 			else
 			{
-				
 				std::cout<<"Invalid input"<<std::endl<<args[1]<<std::endl;
 			}  
 		}
 	}
+	std::cout<<res<<std::endl;
 	if(res == 0)
 	{
 		std::cout<<"(FALSE)"<<std::endl;
