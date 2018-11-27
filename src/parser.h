@@ -115,7 +115,7 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 			{
 				std::cout<<"Test"<<std::endl;
 				command = new Test(args);
-				command.print_args();
+				command->print_args();
 			}
 			else
 			{
