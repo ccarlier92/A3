@@ -66,18 +66,6 @@ Base * Parse_test(boost::tokenizer<boost::char_separator<char> > commands , boos
 	return test;
 }
 
-bool is_flag(std::string value)
-{
-	bool res = false;
-	if(value.empty() == false)
-	{
-		if(value.size() == 2 && value[0] == '-')
-		{
-			res = true;
-		}
-	}
-}
-
 
 Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost::tokenizer<boost::char_separator<char> >::iterator it, bool in_parenthesis)
 {
