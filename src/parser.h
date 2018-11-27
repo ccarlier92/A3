@@ -49,7 +49,7 @@ Base * Parse_command (boost::tokenizer<boost::char_separator<char> > commands , 
 		else
 		{
 			command = new Command(args);
-			command->print_args();
+			//command->print_args();
 		}
 	}
 	return command;	
