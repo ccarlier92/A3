@@ -13,7 +13,7 @@
 #include <string>
 
 
-/*Base * Parse_command (boost::tokenizer<boost::char_separator<char> > commands , boost::tokenizer<boost::char_separator<char> >::iterator it)
+Base * Parse_command (boost::tokenizer<boost::char_separator<char> > commands , boost::tokenizer<boost::char_separator<char> >::iterator it)
 {				   
 	std::vector<std::string> args;
 	bool is_exit = false;			//Check if the command is exit or not
@@ -53,7 +53,7 @@
 		}
 	}
 	return command;	
-}*/
+}
 				   
 Base * Parse_test(boost::tokenizer<boost::char_separator<char> > commands , boost::tokenizer<boost::char_separator<char> >::iterator it)
 {	
@@ -81,13 +81,11 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 	
 	while( it != commands.end() && !(in_parenthesis && *it == ")"))				//Start parsing
 	{
-		if(in_parenthesis)
-		{
-			std::cout<<"Start Loop"<<std::endl;
-		}
 		
-		//vect_commands.push_back(Parse_command(commands,it));
-		std::vector<std::string> args;
+		
+		vect_commands.push_back(Parse_command(commands,it));
+		std::cout<<*it<<std::endl;
+		/*std::vector<std::string> args;
 		bool is_test = false;
 		bool is_exit = false;			//Check if the command is exit or not
 		
@@ -125,7 +123,7 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 				command->print_args();
 			}
 			vect_commands.push_back(command);
-		}
+		}*/
 
 		if(it != commands.end() && !(in_parenthesis && *it == ")"))
 		{
@@ -140,6 +138,7 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 			{
 				std::cout<<"Test"<<std::endl;
 				vect_commands.push_back(Parse_test(commands,it));
+				std::cout<<*it<<std::endl;
 			}
 			
 			//if it is a connector ==> create it
@@ -244,10 +243,10 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 			std::cout<<"Invalid Input"<<std::endl;
 			std::cout<<"connectors "<<vect_connectors.size() <<std::endl;
 			std::cout<< "commands "<<vect_commands.size()<<std::endl;
-			for(int i=0;i< vect_commands.size();i++)
+			/*for(int i=0;i< vect_commands.size();i++)
 			{
 				vect_commands[i]->print_args();
-			}
+			}*/
 		}
 		else if(valid_connector == false)
 		{
