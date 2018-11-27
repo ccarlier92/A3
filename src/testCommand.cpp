@@ -11,17 +11,24 @@ bool Test::execute()
   
   if(is_flag(this->args[0]) == false || this->args[0] == "-e")
   {
-    res = stat(this->args[1], &buffer) == 0;
+	if(stat(this->args[1], &buffer) == 0
+	{
+	       res = true;
+	}
+	else
+	{
+	       res = false;
+	}
   }
   
   else if(this->args[0] == "-d")
   {
-    res = S_ISDIR(buffer->st_mode);
+    res = S_ISDIR(buffer.st_mode);
   }
   
   else if(this->args[0] == "-f")
   {
-    res = S_ISREG(buffer->st_mode);
+    res = S_ISREG(buffer.st_mode);
   }
   
   else
