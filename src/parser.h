@@ -93,7 +93,6 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 		while((it != commands.end()) && ( *it != "&" && *it != "|" && *it != ";" && *it != "#" && *it != "("  && *it != ")" && *it != "[" ))
 		{
 			args.push_back(*it);
-			std::cout<<*it<<std::endl;
 			if(*it == "exit" )	//if it is an exit command
 			{
 				is_exit = true;
@@ -120,7 +119,6 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 			else
 			{
 				command = new Command(args);
-				command->print_args();
 			}
 			vect_commands.push_back(command);
 		}
@@ -252,10 +250,7 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 			std::cout<<"Invalid Input"<<std::endl;
 			std::cout<<"connectors "<<vect_connectors.size() <<std::endl;
 			std::cout<< "commands "<<vect_commands.size()<<std::endl;
-			/*for(int i=0;i< vect_commands.size();i++)
-			{
-				vect_commands[i]->print_args();
-			}*/
+			
 		}
 		else if(valid_connector == false)
 		{
