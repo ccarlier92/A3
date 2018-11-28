@@ -69,7 +69,7 @@
 }*/
 
 
-Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost::tokenizer<boost::char_separator<char> >::iterator it, bool in_parenthesis)
+Base * Parse(boost::tokenizer<boost::char_separator<char> > commands , boost::tokenizer<boost::char_separator<char> >::iterator it, bool in_parenthesis)
 {
 	//The base that will be returned	
 	Base * res;
@@ -206,7 +206,7 @@ Base * Parse_It(boost::tokenizer<boost::char_separator<char> > commands , boost:
 				if(it != commands.end())
 				{
 					std::cout<<"In Parenthesis"<<std::endl;
-					Base * parenthesis = new Parenthesis(Parse_It(commands,it,true));
+					Base * parenthesis = new Parenthesis(Parse(commands,it,true));
 					vect_commands.push_back(parenthesis);
 				}
 				it++;
