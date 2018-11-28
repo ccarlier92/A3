@@ -93,8 +93,6 @@ Base * Parse(boost::tokenizer<boost::char_separator<char> > commands , boost::to
 					it++;
 				}
 				Base * test = new Test(args);
-				test->print_args();
-				std::cout<<"\n";
 				vect_commands.push_back(test);
 			}
 			
@@ -153,7 +151,6 @@ Base * Parse(boost::tokenizer<boost::char_separator<char> > commands , boost::to
 				{
 					std::cout<<"In Parenthesis"<<std::endl;
 					Base * parenthesis = new Parenthesis(Parse(commands,it,true));
-					parenthesis->print_args();
 					int i =1;
 					while ( i !=0)
 					{
@@ -167,7 +164,6 @@ Base * Parse(boost::tokenizer<boost::char_separator<char> > commands , boost::to
 						    i++;
 						}
 					}
-					std::cout<<"\n"<<*it<<std::endl;
 					vect_commands.push_back(parenthesis);
 				}
 			}
