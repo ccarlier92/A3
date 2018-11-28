@@ -88,9 +88,9 @@ Base * Parse(boost::tokenizer<boost::char_separator<char> > commands , boost::to
 					it++;
 				}
 				Base * test = new Test(args);
-				vect_commands.push_back(test);	
-				//vect_commands.push_back(Parse_test(commands,it));
-				//std::cout<<*it<<std::endl;
+				test->print_args();
+				std::cout<<"\n";
+				vect_commands.push_back(test);
 			}
 			
 			//if it is a connector ==> create it
