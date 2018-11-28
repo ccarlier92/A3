@@ -23,7 +23,7 @@ int  main()
 		//Call the tokenizer class
 		typedef boost::tokenizer<boost::char_separator<char> > tokenizer;
 
-		boost::char_separator<char> delimiters(" ","&|;#()");	/*The blank will disappear in the parsed result but '&','|',';',and '#' will be keeped as token*/
+		boost::char_separator<char> delimiters(" ","&|;#()[]");	/*The blank will disappear in the parsed result but '&','|',';',and '#' will be keeped as token*/
 		tokenizer tokens(command,delimiters);		//split into tokens
 		
 		Base * new_base = Parse(tokens, tokens.begin(),false);
