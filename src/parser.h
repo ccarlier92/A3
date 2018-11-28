@@ -78,7 +78,7 @@ Base * Parse(boost::tokenizer<boost::char_separator<char> > commands , boost::to
 			//When a connector or comment token is reached
 			if(*it == "#")
 			{
-				if(vect_commands.size() ==0)
+				if(vect_commands.size() ==0 && vect_connectors.size() == 0)
 				{
 					is_comment_line = true;
 				}
