@@ -21,19 +21,19 @@ bool Test::execute()
 		if(is_flag(args[1]))
 		{
 			int status = stat(args[2], &buffer);
-			if(args[1] == "-e")
+			if(!strcmp(args[1],"-e"))
 			{
 				if(status == 0)
 				{
 					res =1;
 				}
 			}
-			else if(args[1] == "-d")
+			else if(!strcmp(args[1],"-d"))
 			{
 				std::cout<<"test if "<<args[2] <<" is a directory"<<std::endl;
 				res = S_ISDIR(buffer.st_mode);
 			}
-			else if(args[1] == f)
+			else if(!strcmp(args[1], "-f"))
 			{
 				std::cout<<"test if "<<args[2] <<" is a file"<<std::endl;
 				res = S_ISREG(buffer.st_mode);
