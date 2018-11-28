@@ -27,7 +27,8 @@ Base * Parse(boost::tokenizer<boost::char_separator<char> > commands , boost::to
 	std::vector<Connector*> vect_connectors;
 	
 	bool valid_connector = true;		//Check if there are 2 characters for && and ||
-	
+	bool is_comment_line = false;
+
 	while( it != commands.end() && !(in_parenthesis && *it == ")"))				//Start parsing
 	{
 		
@@ -37,7 +38,6 @@ Base * Parse(boost::tokenizer<boost::char_separator<char> > commands , boost::to
 		std::vector<std::string> args;
 		bool is_test = false;
 		bool is_exit = false;			//Check if the command is exit or not
-		bool is_comment_line = false;
 		//This loop gets a command, the executable and its arguments
 		while((it != commands.end()) && ( *it != "&" && *it != "|" && *it != ";" && *it != "#" && *it != "("  && *it != ")" && *it != "[" ))
 		{
