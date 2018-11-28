@@ -6,14 +6,13 @@
 
 bool Test::execute()
 {
-  	int res = -1;
+  	int res = 0;
   	struct stat buffer;   
-	char f [] = "-f";
 	if(args[2] == NULL)
 	{
 		if(stat(args[1], &buffer) == 0)
 		{
-		       res = 1;
+			res = 1;
 		}  
 	}
 	else
@@ -30,12 +29,12 @@ bool Test::execute()
 			}
 			else if(!strcmp(args[1],"-d"))
 			{
-				std::cout<<"test if "<<args[2] <<" is a directory"<<std::endl;
+				//std::cout<<"test if "<<args[2] <<" is a directory"<<std::endl;
 				res = S_ISDIR(buffer.st_mode);
 			}
 			else if(!strcmp(args[1], "-f"))
 			{
-				std::cout<<"test if "<<args[2] <<" is a file"<<std::endl;
+				//std::cout<<"test if "<<args[2] <<" is a file"<<std::endl;
 				res = S_ISREG(buffer.st_mode);
 			}
 			else
@@ -44,7 +43,7 @@ bool Test::execute()
 			}  
 		}
 	}
-	std::cout<<res<<std::endl;
+	//std::cout<<res<<std::endl;
 	if(res == 0)
 	{
 		std::cout<<"(FALSE)"<<std::endl;
