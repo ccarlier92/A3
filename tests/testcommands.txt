@@ -3,4 +3,4 @@
 test -d ../tests && test -f ../tests/singlecommands.txt
 [-w main.cpp] || [-f main.cpp]
 [-e shouldnotwork] || test semiColon.cpp ; [-f base.h]
-exit;
+exit
