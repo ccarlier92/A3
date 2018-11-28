@@ -74,7 +74,6 @@ bool Test::is_flag(char* value)
 	bool res = false;
 	if(value != NULL)
 	{
-		std::cout <<std::endl<<value[0]<<std::endl;
 	  	if(value[0] == '-')
 		{
 			res = true;
