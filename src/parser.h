@@ -162,6 +162,7 @@ Base * Parse(boost::tokenizer<boost::char_separator<char> > commands , boost::to
 						    i++;
 						}
 					}
+					it++;
 					std::cout<<"\n"<<*it<<std::endl;
 					vect_commands.push_back(parenthesis);
 				}
