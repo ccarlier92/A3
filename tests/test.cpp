@@ -5,6 +5,8 @@
 #include "../src/and.cpp"
 #include "../src/or.cpp"
 #include "../src/semiColon.cpp"
+#include "../src/testCommand.cpp"
+#include "../src/parenthesis.cpp"
 
 #include "gtest/gtest.h"
 
