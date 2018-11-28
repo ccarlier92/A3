@@ -71,12 +71,17 @@ Base * Parse(boost::tokenizer<boost::char_separator<char> > commands , boost::to
 			}
 			vect_commands.push_back(command);
 		}
-
+		
+		bool is_comment_line = false;
 		if(it != commands.end() && !(in_parenthesis && *it == ")"))
 		{
 			//When a connector or comment token is reached
 			if(*it == "#")
 			{
+				if(vect_commands.size() ==0)
+				{
+					is_comment_line = true;
+				}
 				//Don't need what's next so break
 				break;
 			}
@@ -205,7 +210,7 @@ Base * Parse(boost::tokenizer<boost::char_separator<char> > commands , boost::to
 	{
 		//return null
 		res = NULL;
-		if (vect_connectors.size()!= (vect_commands.size()-1))
+		if (vect_connectors.size()!= (vect_commands.size()-1) && !is_comment_line )
 		{
 			std::cout<<"Invalid Input"<<std::endl;
 			
