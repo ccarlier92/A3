@@ -18,7 +18,7 @@ int  main()
 		prompt();
 		std::getline(std::cin,command);
 		
-		if(Parenthesis_Even(command))
+		if(Parenthesis_Even(command) && !command.empty())
 		{
 			Base * res;
 
@@ -34,7 +34,7 @@ int  main()
 				bool res = new_base->execute();
 			}
 		}
-		else
+		else if(!Parenthesis_Even(command))
 		{
 			std::cout<<"Invalid amount of parenthesis"<<std::endl;
 		}
