@@ -8,9 +8,14 @@
 #include "exit.cpp"
 #include "parenthesis.h"
 #include "testCommand.h"
-
+#include <algorithm>
 #include <boost/tokenizer.hpp>
 #include <string>
+
+bool Parenthesis_Even(std::string line)
+{
+	return (std::count(line.begin(),line.end(),'(') == std::count(line.begin(),line.end(),')') );
+}
 
 
 Base * Parse(boost::tokenizer<boost::char_separator<char> > commands , boost::tokenizer<boost::char_separator<char> >::iterator it, bool in_parenthesis)
