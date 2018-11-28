@@ -235,7 +235,94 @@ TEST(AllConectors,False)
         EXPECT_EQ(false, result->execute());
 }
 
+TEST(TestCommand,Flag_e){
+	
+	std::string input = "test -e ./src/main.cpp";
+        typedef boost::tokenizer<boost::char_separator<char> > tokenizer;
 
+	boost::char_separator<char> delimiters(" ","&|;#()[]");	 
+	tokenizer tokens(input,delimiters);
+	Base * result = Parse(tokens,tokens.begin(),false);
+        EXPECT_EQ(true, result->execute());
+}
+
+TEST(TestCommand,Flag_d){
+	
+	std::string input = "test -d ./src";
+        typedef boost::tokenizer<boost::char_separator<char> > tokenizer;
+
+	boost::char_separator<char> delimiters(" ","&|;#()[]");	 
+	tokenizer tokens(input,delimiters);
+	Base * result = Parse(tokens,tokens.begin(),false);
+        EXPECT_EQ(true, result->execute());
+}
+TEST(TestCommand,Flag_f){
+	
+	std::string input = "test -f ./src/main.cpp";
+        typedef boost::tokenizer<boost::char_separator<char> > tokenizer;
+
+	boost::char_separator<char> delimiters(" ","&|;#()[]");	 
+	tokenizer tokens(input,delimiters);
+	Base * result = Parse(tokens,tokens.begin(),false);
+        EXPECT_EQ(true, result->execute());
+}
+TEST(TestCommand, No_Flag){
+	
+	std::string input = "test ./src/main.cpp";
+        typedef boost::tokenizer<boost::char_separator<char> > tokenizer;
+
+	boost::char_separator<char> delimiters(" ","&|;#()[]");	 
+	tokenizer tokens(input,delimiters);
+	Base * result = Parse(tokens,tokens.begin(),false);
+        EXPECT_EQ(true, result->execute());
+}
+
+TEST(TestCommand,Symbolic_version){
+	
+	std::string input = "[-e ./src/main.cpp]";
+        typedef boost::tokenizer<boost::char_separator<char> > tokenizer;
+
+	boost::char_separator<char> delimiters(" ","&|;#()[]");	 
+	tokenizer tokens(input,delimiters);
+	Base * result = Parse(tokens,tokens.begin(),false);
+        EXPECT_EQ(true, result->execute());
+}
+
+TEST(Parenthesis,simpleCommand){
+	
+	std::string input = "(echo A && echo B) || (echo C && echo D)";
+        typedef boost::tokenizer<boost::char_separator<char> > tokenizer;
+	
+	std::ostringstream oss;
+        std::streambuf* p_cout_streambuf = std::cout.rdbuf();
+        std::cout.rdbuf(oss.rdbuf());
+
+	boost::char_separator<char> delimiters(" ","&|;#()[]");	 
+	tokenizer tokens(input,delimiters);
+	Base * result = Parse(tokens,tokens.begin(),false);
+     	result->execute();
+
+        assert(oss && oss.str() == "A\nB\n");
+        std::cout << oss.str();
+}
+
+TEST(Parenthesis,multiple_parenthesis){
+	
+	std::string input = "((echo A && echo B) || (echo C && echo D)) && echo C";
+        typedef boost::tokenizer<boost::char_separator<char> > tokenizer;
+	
+	std::ostringstream oss;
+        std::streambuf* p_cout_streambuf = std::cout.rdbuf();
+        std::cout.rdbuf(oss.rdbuf());
+
+	boost::char_separator<char> delimiters(" ","&|;#()[]");	 
+	tokenizer tokens(input,delimiters);
+	Base * result = Parse(tokens,tokens.begin(),false);
+     	result->execute();
+
+        assert(oss && oss.str() == "A\nB\n\C");
+        std::cout << oss.str();
+}
 
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);
