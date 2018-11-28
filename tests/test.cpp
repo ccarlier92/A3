@@ -301,7 +301,7 @@ TEST(Parenthesis,simpleCommand){
 	tokenizer tokens(input,delimiters);
 	Base * result = Parse(tokens,tokens.begin(),false);
      	result->execute();
-        assert(oss && oss.str() == "A\n"+"B\n");
+        assert(oss && oss.str() == ("A\n"+"B\n"));
         std::cout << oss.str();
 }
 
@@ -319,7 +319,7 @@ TEST(Parenthesis,multiple_parenthesis){
 	Base * result = Parse(tokens,tokens.begin(),false);
      	result->execute();
 
-        assert(oss && oss.str() == "A\n" + "B\n" + "C\n");
+        assert(oss && oss.str() == ("A\n" + "B\n" + "C\n"));
         std::cout << oss.str();
 }
 
