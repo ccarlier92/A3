@@ -77,7 +77,7 @@ TEST(SingleCommand,True)
 	boost::char_separator<char> delimiters(" ","&|;#()");	 
 	tokenizer tokens(input,delimiters);
 	Base * result = Parse(tokens,tokens.begin(),false);
-	EXPECT_EQ(true, resultat->execute());
+	EXPECT_EQ(true, result->execute());
 }
 
 TEST(SingleCommand,False)
@@ -88,7 +88,7 @@ TEST(SingleCommand,False)
 	boost::char_separator<char> delimiters(" ","&|;#()");	 
 	tokenizer tokens(input,delimiters);
 	Base * result = Parse(tokens,tokens.begin(),false);
-	EXPECT_EQ(false, resultat->execute());
+	EXPECT_EQ(false, result->execute());
 }
 
 
@@ -100,7 +100,7 @@ TEST(And,BothTrue)
 	boost::char_separator<char> delimiters(" ","&|;#()");	 
 	tokenizer tokens(input,delimiters);
 	Base * result = Parse(tokens,tokens.begin(),false);
-	EXPECT_EQ(true, resultat->execute());
+	EXPECT_EQ(true, result->execute());
 }
 
 TEST(And,BothFalse)
@@ -111,7 +111,7 @@ TEST(And,BothFalse)
 	boost::char_separator<char> delimiters(" ","&|;#()");	 
 	tokenizer tokens(input,delimiters);
 	Base * result = Parse(tokens,tokens.begin(),false);
-        EXPECT_EQ(false, resultat->execute());
+        EXPECT_EQ(false, result->execute());
 }
 
 TEST(And,TrueFalse)
@@ -122,7 +122,7 @@ TEST(And,TrueFalse)
 	boost::char_separator<char> delimiters(" ","&|;#()");	 
 	tokenizer tokens(input,delimiters);
 	Base * result = Parse(tokens,tokens.begin(),false);
-        EXPECT_EQ(false, resultat->execute());
+        EXPECT_EQ(false, result->execute());
 }
 TEST(And,FalseTrue)
 {
@@ -132,7 +132,7 @@ TEST(And,FalseTrue)
 	boost::char_separator<char> delimiters(" ","&|;#()");	 
 	tokenizer tokens(input,delimiters);
 	Base * result = Parse(tokens,tokens.begin(),false);
-        EXPECT_EQ(false, resultat->execute());
+        EXPECT_EQ(false, result->execute());
 }
 
 TEST(Or,BothFalse)
@@ -143,7 +143,7 @@ TEST(Or,BothFalse)
 	boost::char_separator<char> delimiters(" ","&|;#()");	 
 	tokenizer tokens(input,delimiters);
 	Base * result = Parse(tokens,tokens.begin(),false);
-        EXPECT_EQ(false, resultat->execute());
+        EXPECT_EQ(false, result->execute());
 }
 TEST(Or,BothTrue)
 {
@@ -153,14 +153,18 @@ TEST(Or,BothTrue)
 	boost::char_separator<char> delimiters(" ","&|;#()");	 
 	tokenizer tokens(input,delimiters);
 	Base * result = Parse(tokens,tokens.begin(),false);
-        EXPECT_EQ(false, resultat->execute());
+        EXPECT_EQ(false, result->execute());
 }
 
 TEST(Or,FalseTrue)
 {
         std::string input = "hello || echo world";
-        Base* resultat = Parse(input);
-        EXPECT_EQ(true, resultat->execute());
+	typedef boost::tokenizer<boost::char_separator<char> > tokenizer;
+
+	boost::char_separator<char> delimiters(" ","&|;#()");	 
+	tokenizer tokens(input,delimiters);
+	Base * result = Parse(tokens,tokens.begin(),false);
+	EXPECT_EQ(true, result->execute());
 }
 
 TEST(SemiColon,FalseTrue)
@@ -171,7 +175,7 @@ TEST(SemiColon,FalseTrue)
 	boost::char_separator<char> delimiters(" ","&|;#()");	 
 	tokenizer tokens(input,delimiters);
 	Base * result = Parse(tokens,tokens.begin(),false);
-        EXPECT_EQ(true, resultat->execute());
+        EXPECT_EQ(true, result->execute());
 }
 
 TEST(SemiColon,BothTrue)
@@ -182,7 +186,7 @@ TEST(SemiColon,BothTrue)
 	boost::char_separator<char> delimiters(" ","&|;#()");	 
 	tokenizer tokens(input,delimiters);
 	Base * result = Parse(tokens,tokens.begin(),false);
-        EXPECT_EQ(true, resultat->execute());
+        EXPECT_EQ(true, result->execute());
 }
 
 TEST(SemiColon,BothFalse)
@@ -193,7 +197,7 @@ TEST(SemiColon,BothFalse)
 	boost::char_separator<char> delimiters(" ","&|;#()");	 
 	tokenizer tokens(input,delimiters);
 	Base * result = Parse(tokens,tokens.begin(),false);
-        EXPECT_EQ(false, resultat->execute());
+        EXPECT_EQ(false, result->execute());
 }
 
 TEST(SemiColon,TrueFalse)
@@ -204,7 +208,7 @@ TEST(SemiColon,TrueFalse)
 	boost::char_separator<char> delimiters(" ","&|;#()");	 
 	tokenizer tokens(input,delimiters);
 	Base * result = Parse(tokens,tokens.begin(),false);
-        EXPECT_EQ(false, resultat->execute());
+        EXPECT_EQ(false, result->execute());
 }
 
 TEST(AllConnectors,True)
@@ -215,7 +219,7 @@ TEST(AllConnectors,True)
 	boost::char_separator<char> delimiters(" ","&|;#()");	 
 	tokenizer tokens(input,delimiters);
 	Base * result = Parse(tokens,tokens.begin(),false);
-        EXPECT_EQ(true, resultat->execute());
+        EXPECT_EQ(true, result->execute());
 }
 
 TEST(AllConectors,False)
@@ -226,7 +230,7 @@ TEST(AllConectors,False)
 	boost::char_separator<char> delimiters(" ","&|;#()");	 
 	tokenizer tokens(input,delimiters);
 	Base * result = Parse(tokens,tokens.begin(),false);
-        EXPECT_EQ(false, resultat->execute());
+        EXPECT_EQ(false, result->execute());
 }
 
 
