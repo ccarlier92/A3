@@ -7,6 +7,8 @@
 
 bool Test::execute()
 {
+	this->print_args();
+	std::cout<<"\n";
   	int res = -1;
   	struct stat buffer;   
 	if(args[2] == NULL)
@@ -48,21 +50,23 @@ bool Test::execute()
 			}
 			else
 			{
-				std::cout<<"Invalid input"<<std::endl<<args[1]<<std::endl;
+				std::cout<<"Invalid input"<<std::endl;
 			}  
 		}
 	}
 	//std::cout<<res<<std::endl;
+	bool result = false;
 	if(res == 0)
 	{
 		std::cout<<"(FALSE)"<<std::endl;
 	}
 	else if (res>0)
 	{
+		result = true;
 		std::cout<<"(TRUE)"<<std::endl;
 	}
 
-	return(res);
+	return(result);
 }
 
 bool Test::is_flag(char* value)
@@ -75,14 +79,6 @@ bool Test::is_flag(char* value)
 		{
 			res = true;
 		}
-	}
-	if(res==false)
-	{
-		std::cout<<value<<" is not a flag"<<std::endl;
-	}
-	else
-	{
-		std::cout<<value<<" is a flag"<<std::endl;
 	}
   	return res;
 }
