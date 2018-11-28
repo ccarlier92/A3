@@ -14,8 +14,12 @@ TEST(Parser,SingleCommand)
   	std::ostringstream oss;
 	std::streambuf* p_cout_streambuf = std::cout.rdbuf();
 	std::cout.rdbuf(oss.rdbuf());
+	
+	typedef boost::tokenizer<boost::char_separator<char> > tokenizer;
 
-	Base * result = Parse(input);
+	boost::char_separator<char> delimiters(" ","&|;#()");	 
+	tokenizer tokens(input,delimiters);
+	Base * result = Parse(tokens,tokens.begin(),false);
   	result->print_args();
 
 	std::cout.rdbuf(p_cout_streambuf);
@@ -32,7 +36,11 @@ TEST(Parser,MultiCommand)
         std::streambuf* p_cout_streambuf = std::cout.rdbuf();
         std::cout.rdbuf(oss.rdbuf());
 
-        Base * result = Parse(input);
+       typedef boost::tokenizer<boost::char_separator<char> > tokenizer;
+
+	boost::char_separator<char> delimiters(" ","&|;#()");	 
+	tokenizer tokens(input,delimiters);
+	Base * result = Parse(tokens,tokens.begin(),false);
         result->print_args();
 
         std::cout.rdbuf(p_cout_streambuf);
@@ -48,7 +56,11 @@ TEST(Parser,Comments)
         std::streambuf* p_cout_streambuf = std::cout.rdbuf();
         std::cout.rdbuf(oss.rdbuf());
 
-        Base * result = Parse(input);
+        typedef boost::tokenizer<boost::char_separator<char> > tokenizer;
+
+	boost::char_separator<char> delimiters(" ","&|;#()");	 
+	tokenizer tokens(input,delimiters);
+	Base * result = Parse(tokens,tokens.begin(),false);
         result->print_args();
 
         std::cout.rdbuf(p_cout_streambuf);
@@ -60,55 +72,87 @@ TEST(Parser,Comments)
 TEST(SingleCommand,True)
 {
 	std::string input = "echo hello world";
-	Base* resultat = Parse(input);
+	typedef boost::tokenizer<boost::char_separator<char> > tokenizer;
+
+	boost::char_separator<char> delimiters(" ","&|;#()");	 
+	tokenizer tokens(input,delimiters);
+	Base * result = Parse(tokens,tokens.begin(),false);
 	EXPECT_EQ(true, resultat->execute());
 }
 
 TEST(SingleCommand,False)
 {
         std::string input = "hello world";
-        Base* resultat = Parse(input);
-        EXPECT_EQ(false, resultat->execute());
+	
+	typedef boost::tokenizer<boost::char_separator<char> > tokenizer;
+	boost::char_separator<char> delimiters(" ","&|;#()");	 
+	tokenizer tokens(input,delimiters);
+	Base * result = Parse(tokens,tokens.begin(),false);
+	EXPECT_EQ(false, resultat->execute());
 }
 
 
 TEST(And,BothTrue)
 {
 	std::string input = "echo hello && echo world";
-	Base* resultat = Parse(input);
+	typedef boost::tokenizer<boost::char_separator<char> > tokenizer;
+
+	boost::char_separator<char> delimiters(" ","&|;#()");	 
+	tokenizer tokens(input,delimiters);
+	Base * result = Parse(tokens,tokens.begin(),false);
 	EXPECT_EQ(true, resultat->execute());
 }
 
 TEST(And,BothFalse)
 {
         std::string input = "hello && world";
-        Base* resultat = Parse(input);
+       typedef boost::tokenizer<boost::char_separator<char> > tokenizer;
+
+	boost::char_separator<char> delimiters(" ","&|;#()");	 
+	tokenizer tokens(input,delimiters);
+	Base * result = Parse(tokens,tokens.begin(),false);
         EXPECT_EQ(false, resultat->execute());
 }
 
 TEST(And,TrueFalse)
 {
         std::string input = "echo hello && world";
-        Base* resultat = Parse(input);
+        typedef boost::tokenizer<boost::char_separator<char> > tokenizer;
+
+	boost::char_separator<char> delimiters(" ","&|;#()");	 
+	tokenizer tokens(input,delimiters);
+	Base * result = Parse(tokens,tokens.begin(),false);
         EXPECT_EQ(false, resultat->execute());
 }
 TEST(And,FalseTrue)
 {
         std::string input = "hello && echo world";
-        Base* resultat = Parse(input);
+        typedef boost::tokenizer<boost::char_separator<char> > tokenizer;
+
+	boost::char_separator<char> delimiters(" ","&|;#()");	 
+	tokenizer tokens(input,delimiters);
+	Base * result = Parse(tokens,tokens.begin(),false);
         EXPECT_EQ(false, resultat->execute());
 }
 
 TEST(Or,BothFalse)
 {
         std::string input = "hello || world";
-        Base* resultat = Parse(input);
+        typedef boost::tokenizer<boost::char_separator<char> > tokenizer;
+
+	boost::char_separator<char> delimiters(" ","&|;#()");	 
+	tokenizer tokens(input,delimiters);
+	Base * result = Parse(tokens,tokens.begin(),false);
         EXPECT_EQ(false, resultat->execute());
 }
 TEST(Or,BothTrue)
 {
         std::string input = "echo hello || echo  world";
-        Base* resultat = Parse(input);
+        typedef boost::tokenizer<boost::char_separator<char> > tokenizer;
+
+	boost::char_separator<char> delimiters(" ","&|;#()");	 
+	tokenizer tokens(input,delimiters);
+	Base * result = Parse(tokens,tokens.begin(),false);
         EXPECT_EQ(false, resultat->execute());
 }
 
@@ -122,42 +166,66 @@ TEST(Or,FalseTrue)
 TEST(SemiColon,FalseTrue)
 {
         std::string input = "hello ; echo world";
-        Base* resultat = Parse(input);
+        typedef boost::tokenizer<boost::char_separator<char> > tokenizer;
+
+	boost::char_separator<char> delimiters(" ","&|;#()");	 
+	tokenizer tokens(input,delimiters);
+	Base * result = Parse(tokens,tokens.begin(),false);
         EXPECT_EQ(true, resultat->execute());
 }
 
 TEST(SemiColon,BothTrue)
 {
         std::string input = "echo hello ; echo world";
-        Base* resultat = Parse(input);
+        typedef boost::tokenizer<boost::char_separator<char> > tokenizer;
+
+	boost::char_separator<char> delimiters(" ","&|;#()");	 
+	tokenizer tokens(input,delimiters);
+	Base * result = Parse(tokens,tokens.begin(),false);
         EXPECT_EQ(true, resultat->execute());
 }
 
 TEST(SemiColon,BothFalse)
 {
         std::string input = "hello ;  world";
-        Base* resultat = Parse(input);
+        typedef boost::tokenizer<boost::char_separator<char> > tokenizer;
+
+	boost::char_separator<char> delimiters(" ","&|;#()");	 
+	tokenizer tokens(input,delimiters);
+	Base * result = Parse(tokens,tokens.begin(),false);
         EXPECT_EQ(false, resultat->execute());
 }
 
 TEST(SemiColon,TrueFalse)
 {
         std::string input = "echo hello ; world";
-        Base* resultat = Parse(input);
+        Btypedef boost::tokenizer<boost::char_separator<char> > tokenizer;
+
+	boost::char_separator<char> delimiters(" ","&|;#()");	 
+	tokenizer tokens(input,delimiters);
+	Base * result = Parse(tokens,tokens.begin(),false);
         EXPECT_EQ(false, resultat->execute());
 }
 
 TEST(AllConnectors,True)
 {
         std::string input = "echo hello &&  echo world || echo not ok ; echo end";
-        Base* resultat = Parse(input);
+        typedef boost::tokenizer<boost::char_separator<char> > tokenizer;
+
+	boost::char_separator<char> delimiters(" ","&|;#()");	 
+	tokenizer tokens(input,delimiters);
+	Base * result = Parse(tokens,tokens.begin(),false);
         EXPECT_EQ(true, resultat->execute());
 }
 
 TEST(AllConectors,False)
 {
         std::string input = "echo hello &&  echo world ; echo end || echo not ok";
-        Base* resultat = Parse(input);
+        typedef boost::tokenizer<boost::char_separator<char> > tokenizer;
+
+	boost::char_separator<char> delimiters(" ","&|;#()");	 
+	tokenizer tokens(input,delimiters);
+	Base * result = Parse(tokens,tokens.begin(),false);
         EXPECT_EQ(false, resultat->execute());
 }
 
