@@ -37,11 +37,11 @@ Base * Parse(boost::tokenizer<boost::char_separator<char> > commands , boost::to
 		while((it != commands.end()) && ( *it != "&" && *it != "|" && *it != ";" && *it != "#" && *it != "("  && *it != ")" && *it != "[" ))
 		{
 			args.push_back(*it);
-			if(*it == "exit" && args.size() ==0)	//if it is an exit command
+			if(*it == "exit" && args.size() ==1)	//if it is an exit command
 			{
 				is_exit = true;
 			}
-			else if(*it == "test" && args.size() ==0)	//if it is a test command
+			else if(*it == "test" && args.size() ==1)	//if it is a test command
 			{
 				is_test = true;
 			}
