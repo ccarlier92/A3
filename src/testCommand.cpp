@@ -6,7 +6,7 @@
 
 bool Test::execute()
 {
-  	int res = 0;
+  	int res = -1;
   	struct stat buffer;   
 	if(args[2] == NULL)
 	{
@@ -14,6 +14,10 @@ bool Test::execute()
 		{
 			res = 1;
 		}  
+		else
+		{
+			res =0;
+		}
 	}
 	else
 	{
@@ -25,6 +29,10 @@ bool Test::execute()
 				if(status == 0)
 				{
 					res =1;
+				}
+				else
+				{
+					res =0;
 				}
 			}
 			else if(!strcmp(args[1],"-d"))
