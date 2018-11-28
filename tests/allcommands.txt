@@ -1,0 +1,9 @@
+echo hello #world
+echo hello world # && echo ok
+ls && echo true || ls -m ; echo test && ps
+# ls -m && echo world || echo hello
+ls || echo true && ls -m && ps; echo test ; exit
+test -e ./src/main.cpp && echo path exists
+( [./src/command.h] && echo path exists) || ([ -f .src/testCommand.cpp] && echo paths exixts)
+( [-d src] && echo this is a directory) || (test -d ./src/main.cpp && echo this is not a directory)
+test -f src; echo this is not a file
