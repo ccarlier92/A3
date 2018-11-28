@@ -7,8 +7,6 @@
 
 bool Test::execute()
 {
-	this->print_args();
-	std::cout<<"\n";
   	int res = -1;
   	struct stat buffer;   
 	if(args[2] == NULL)
