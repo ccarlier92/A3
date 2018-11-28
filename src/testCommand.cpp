@@ -9,7 +9,7 @@ bool Test::execute()
   	int res = -1;
   	struct stat buffer;   
 	char f [] = "-f";
-	if(args[2] == NULL || (is_flag(args[1]) && args[1] == "-e"))
+	if(args[2] == NULL)
 	{
 		if(stat(args[1], &buffer) == 0)
 		{
@@ -20,7 +20,15 @@ bool Test::execute()
 	{
 		if(is_flag(args[1]))
 		{
-			if(args[1] == "-d")
+			int status = stat(args[2], &buffer);
+			if(args[1] == "-e")
+			{
+				if(status == 0)
+				{
+					res =1;
+				}
+			}
+			else if(args[1] == "-d")
 			{
 				std::cout<<"test if "<<args[2] <<" is a directory"<<std::endl;
 				res = S_ISDIR(buffer.st_mode);
