@@ -203,7 +203,7 @@ TEST(SemiColon,BothFalse)
 TEST(SemiColon,TrueFalse)
 {
         std::string input = "echo hello ; world";
-        Btypedef boost::tokenizer<boost::char_separator<char> > tokenizer;
+        typedef boost::tokenizer<boost::char_separator<char> > tokenizer;
 
 	boost::char_separator<char> delimiters(" ","&|;#()");	 
 	tokenizer tokens(input,delimiters);
