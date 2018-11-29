@@ -12,6 +12,19 @@
 #include <boost/tokenizer.hpp>
 #include <string>
 
+std::string RemoveNewLines(std::string str)
+{
+	std::string output;
+        output.reserve(str.size());
+        for(int i = 0; i < str.size(); i++)
+	{
+                if(str[i] != '\n' && str[i] != ' ') 
+			output += str[i];
+	}
+	std::cout << output;
+	return(output);
+
+}
 bool Parenthesis_Even(std::string line)
 {
 	return (std::count(line.begin(),line.end(),'(') == std::count(line.begin(),line.end(),')') );
