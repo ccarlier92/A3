@@ -31,3 +31,10 @@
 *.out
 *.app
 CMakeCahe.txt CMakeFiles/ Makefile cmake_install.cmake rshell test
+CMakeCache.txt
+CMakeFiles/
+Makefile
+cmake_install.cmake
+main
+rshell
+test

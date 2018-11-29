@@ -281,15 +281,11 @@ TEST(Parenthesis,simpleCommand){
 	std::string input = "(echo A && echo B) || (echo C && echo D)";
         typedef boost::tokenizer<boost::char_separator<char> > tokenizer;
 	
-	std::ostringstream oss;
-        std::streambuf* p_cout_streambuf = std::cout.rdbuf();
-        std::cout.rdbuf(oss.rdbuf());
-
 	boost::char_separator<char> delimiters(" ","&|;#()[]");	 
 	tokenizer tokens(input,delimiters);
 	Base * result = Parse(tokens,tokens.begin(),false);
-     	result->execute();
-	EXPECT_EQ(oss.str(), "A\nB\n");
+	
+	EXPECT_EQ(true, result->execute());
 	
 }
 
@@ -298,16 +294,10 @@ TEST(Parenthesis,multiple_parenthesis){
 	std::string input = "((echo A && echo B) || (echo C && echo D)) && echo C";
         typedef boost::tokenizer<boost::char_separator<char> > tokenizer;
 	
-	std::ostringstream oss;
-        std::streambuf* p_cout_streambuf = std::cout.rdbuf();
-        std::cout.rdbuf(oss.rdbuf());
-
 	boost::char_separator<char> delimiters(" ","&|;#()[]");	 
 	tokenizer tokens(input,delimiters);
 	Base * result = Parse(tokens,tokens.begin(),false);
-     	result->execute();
-        EXPECT_EQ(oss.str(),("A\nB\nC\n"));
-        std::cout << oss.str();
+	EXPECT_EQ(true, result->execute());
 }
 
 int main(int argc, char **argv) {
