@@ -48,7 +48,7 @@ bool Test::execute()
 			}
 			else
 			{
-				std::cout<<"Invalid input"<<std::endl;
+				std::cout<<"Invalid flag"<<std::endl;
 			}  
 		}
 	}
