@@ -6,86 +6,127 @@
 #include "semiColon.h"
 #include "exit.h"
 #include "exit.cpp"
-
+#include "parenthesis.h"
+#include "testCommand.h"
+#include <algorithm>
 #include <boost/tokenizer.hpp>
 #include <string>
 
+std::string RemoveNewLines(std::string str)
+{
+	std::string output;
+        output.reserve(str.size());
+        for(int i = 0; i < str.size(); i++)
+	{
+                if(str[i] != '\n' && str[i] != ' ') 
+			output += str[i];
+	}
+	std::cout << output;
+	return(output);
 
-Base * Parse(std::string command_line)
+}
+bool Parenthesis_Even(std::string line)
+{
+	return (std::count(line.begin(),line.end(),'(') == std::count(line.begin(),line.end(),')') );
+}
+
+
+Base * Parse(boost::tokenizer<boost::char_separator<char> > commands , boost::tokenizer<boost::char_separator<char> >::iterator it, bool in_parenthesis)
 {
 	//The base that will be returned	
 	Base * res;
-
-	//Call the tokenizer class
-	typedef boost::tokenizer<boost::char_separator<char> > tokenizer;
-
-	boost::char_separator<char> delimiters(" ","&|;#");	/*The blank will disappear in the parsed result but '&','|',';',and '#' will be keeped as token*/
-	tokenizer tokens(command_line,delimiters);		//split into tokens
 	
-	//To store the commands and connectors
-	std::vector<Command*> vect_commands;
+	std::vector<Base*> vect_commands;
 	std::vector<Connector*> vect_connectors;
 	
-	tokenizer::iterator it = tokens.begin();
-	
 	bool valid_connector = true;		//Check if there are 2 characters for && and ||
-	
-	while( it != tokens.end())				//Start parsing
+	bool is_comment_line = false;
+
+	while( it != commands.end() && !(in_parenthesis && *it == ")"))				//Start parsing
 	{
-		std::string actual_token = *it;	
-		std::vector<std::string> args;
-		bool is_exit = false;			//Check if the command is exit or not
 		
+		
+		//vect_commands.push_back(Parse_command(commands,it));
+		//std::cout<<*it<<std::endl;
+		std::vector<std::string> args;
+		bool is_test = false;
+		bool is_exit = false;			//Check if the command is exit or not
 		//This loop gets a command, the executable and its arguments
-		while((it != tokens.end()) && (( actual_token != "&") && (actual_token != "|") && (actual_token != ";") && (actual_token != "#")))
+		while((it != commands.end()) && ( *it != "&" && *it != "|" && *it != ";" && *it != "#" && *it != "("  && *it != ")" && *it != "[" ))
 		{
-			args.push_back(actual_token);
-			if(actual_token == "exit" )	//if it is an exit command
+			args.push_back(*it);
+			if(*it == "exit" && args.size() ==1)	//if it is an exit command
 			{
 				is_exit = true;
 			}
-			it++;
-			if(it != tokens.end())
+			else if(*it == "test" && args.size() ==1)	//if it is a test command
 			{
-				actual_token = *it;
+				is_test = true;
 			}
+			it++;
 		}
-		if(args.size() != 0)			//Check if it was not a single command or not
+
+		if(args.size() != 0)			//Check if it was not a single command, a test, or an exit
 		{
-			Command * command;
+			Command *command;
 			if(is_exit == true)
 			{
 				command = new Exit(args);	
+			}
+			else if (is_test == true)
+			{
+				//std::cout<<"Test"<<std::endl;
+				command = new Test(args);
 			}
 			else
 			{
 				command = new Command(args);
 			}
-			vect_commands.push_back(command);	//add the command to the vector
+			vect_commands.push_back(command);
 		}
-
-
-		if(it != tokens.end())
+		
+		
+		if(it != commands.end() && !(in_parenthesis && *it == ")"))
 		{
 			//When a connector or comment token is reached
-			if(actual_token == "#")
+			if(*it == "#")
 			{
+				if(vect_commands.size() ==0 && vect_connectors.size() == 0)
+				{
+					is_comment_line = true;
+				}
 				//Don't need what's next so break
 				break;
+			}
+			
+			if(*it == "[")
+			{
+				it++;
+				std::vector<std::string> args;
+				std::string test_arg = "test";
+				args.push_back(test_arg);
+				while(it != commands.end() && *it != "]")
+				{
+					args.push_back(*it);
+					it++;
+				}
+				Base * test = new Test(args);
+				vect_commands.push_back(test);
 			}
 			
 			//if it is a connector ==> create it
 			//add it to the vector
 			//if & or | conectors, go to next iterator which will end up being skipped
-			if(actual_token == "&")
+			if(*it == "&")
 			{	
+				std::string prev_connector =*it;
 				it++;
-				if (it == tokens.end())
+				if (it == commands.end() && !(in_parenthesis && *it == ")"))
 				{
 					valid_connector = false;
 					break;
 				}
-				else if (actual_token != *it)
+				else if (prev_connector != *it)
 				{
 					valid_connector = false;
 					break;
@@ -96,15 +137,16 @@ Base * Parse(std::string command_line)
 					vect_connectors.push_back(connector);
 				}
 			}
-			else if(actual_token == "|")
+			else if(*it == "|")
 			{
+				std::string prev_connector = *it;
 				it++;
-				if (it == tokens.end())
+				if (it == commands.end() && !(in_parenthesis && *it == ")"))
 				{
 					valid_connector = false;
 					break;
 				}
-				else if (actual_token != *it)
+				else if (prev_connector != *it)
 				{
 					valid_connector = false;
 					break;
@@ -115,14 +157,36 @@ Base * Parse(std::string command_line)
 					vect_connectors.push_back(connector);
 				}
 			}
-			else if(actual_token == ";")
+			else if(*it == ";")
 			{
 				Connector * connector = new SemiColon();
 				vect_connectors.push_back(connector);
-			}			
-		}	
-			
-		if(it != tokens.end())
+			}	
+			else if(*it == "(")
+			{
+				it++;
+				if(it != commands.end())
+				{
+					//std::cout<<"In Parenthesis"<<std::endl;
+					Base * parenthesis = new Parenthesis(Parse(commands,it,true));
+					int i =1;
+					while ( i !=0)
+					{
+						it++;
+						if ( *it == ")")
+						{
+						    i--;
+						}
+						else if (*it == "(")
+						{
+						    i++;
+						}
+					}
+					vect_commands.push_back(parenthesis);
+				}
+			}
+		}		
+		if(it != commands.end() && !(in_parenthesis && *it == ")"))
 		{
 			it++;
 		}
@@ -159,9 +223,10 @@ Base * Parse(std::string command_line)
 	{
 		//return null
 		res = NULL;
-		if (vect_connectors.size()!= (vect_commands.size()-1))
+		if (vect_connectors.size()!= (vect_commands.size()-1) && !is_comment_line )
 		{
 			std::cout<<"Invalid Input"<<std::endl;
+			
 		}
 		else if(valid_connector == false)
 		{
@@ -170,4 +235,5 @@ Base * Parse(std::string command_line)
 	}
 	return res;
 }
-
+				   
+				  

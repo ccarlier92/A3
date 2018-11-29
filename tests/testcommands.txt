@@ -1,0 +1,6 @@
+[./src/main.cpp] && test ./src/add.cpp
+[-d ./src] ; test or.h
+test -d ./tests && test -f ./tests/singlecommands.txt
+[-w ./src/main.cpp] || [-f ./src/main.cpp]
+[-e shouldnotwork] || test ./src/semiColon.cpp ; [-f ./src/base.h]
+exit

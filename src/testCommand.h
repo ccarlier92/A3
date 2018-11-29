@@ -7,6 +7,7 @@ class Test : public Command{
 	public :
 		Test(std::vector<std::string> args):Command(args){};
 		bool execute();
+		bool is_flag(char* arg);
 };
 
 #endif

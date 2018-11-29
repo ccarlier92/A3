@@ -5,7 +5,7 @@
 #include "connector.h"
 
 class And : public Connector{
-
+	
 	public :
 		And():Connector(){};
 		bool execute();

@@ -3,7 +3,7 @@
 bool Or::execute(){
 
  	if (this->previous->execute())
-		return(false);
+		return(true);
 	else
 		return(this->next->execute());
 }
