@@ -7,7 +7,7 @@
 #include "../src/semiColon.cpp"
 #include "../src/testCommand.cpp"
 #include "../src/parenthesis.cpp"
-#include <boost/algorithm/string.hpp>
+#include <algorithm>
 #include "gtest/gtest.h"
 
 TEST(Parser,SingleCommand)
@@ -155,7 +155,7 @@ TEST(Or,BothTrue)
 	boost::char_separator<char> delimiters(" ","&|;#()");	 
 	tokenizer tokens(input,delimiters);
 	Base * result = Parse(tokens,tokens.begin(),false);
-        EXPECT_EQ(false, result->execute());
+        EXPECT_EQ(true, result->execute());
 }
 
 TEST(Or,FalseTrue)
@@ -223,18 +223,6 @@ TEST(AllConnectors,True)
 	Base * result = Parse(tokens,tokens.begin(),false);
         EXPECT_EQ(true, result->execute());
 }
-
-TEST(AllConectors,False)
-{
-        std::string input = "echo hello &&  echo world ; echo end || echo not ok";
-        typedef boost::tokenizer<boost::char_separator<char> > tokenizer;
-
-	boost::char_separator<char> delimiters(" ","&|;#()");	 
-	tokenizer tokens(input,delimiters);
-	Base * result = Parse(tokens,tokens.begin(),false);
-        EXPECT_EQ(false, result->execute());
-}
-
 TEST(TestCommand,Flag_e){
 	
 	std::string input = "test -e ./src/main.cpp";
@@ -302,6 +290,7 @@ TEST(Parenthesis,simpleCommand){
 	Base * result = Parse(tokens,tokens.begin(),false);
      	result->execute();
 	EXPECT_EQ(oss.str(), "A\nB\n");
+	
 }
 
 TEST(Parenthesis,multiple_parenthesis){
@@ -317,7 +306,7 @@ TEST(Parenthesis,multiple_parenthesis){
 	tokenizer tokens(input,delimiters);
 	Base * result = Parse(tokens,tokens.begin(),false);
      	result->execute();
-        assert(oss && oss.str() == ("A \n B \n C \n"));
+        EXPECT_EQ(oss.str(),("A\nB\nC\n"));
         std::cout << oss.str();
 }
 
