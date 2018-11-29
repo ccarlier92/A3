@@ -75,7 +75,7 @@ Base * Parse(boost::tokenizer<boost::char_separator<char> > commands , boost::to
 			}
 			else if (is_test == true)
 			{
-				std::cout<<"Test"<<std::endl;
+				//std::cout<<"Test"<<std::endl;
 				command = new Test(args);
 			}
 			else
@@ -167,7 +167,7 @@ Base * Parse(boost::tokenizer<boost::char_separator<char> > commands , boost::to
 				it++;
 				if(it != commands.end())
 				{
-					std::cout<<"In Parenthesis"<<std::endl;
+					//std::cout<<"In Parenthesis"<<std::endl;
 					Base * parenthesis = new Parenthesis(Parse(commands,it,true));
 					int i =1;
 					while ( i !=0)
