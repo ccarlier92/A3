@@ -7,7 +7,7 @@
 #include "../src/semiColon.cpp"
 #include "../src/testCommand.cpp"
 #include "../src/parenthesis.cpp"
-
+#include <boost/algorithm/string.hpp>
 #include "gtest/gtest.h"
 
 TEST(Parser,SingleCommand)
@@ -301,8 +301,7 @@ TEST(Parenthesis,simpleCommand){
 	tokenizer tokens(input,delimiters);
 	Base * result = Parse(tokens,tokens.begin(),false);
      	result->execute();
-        assert(oss && oss.str() == ("A\nB\n"));
-        std::cout << oss.str();
+	EXPECT_EQ(oss.str(), "A\nB\n");
 }
 
 TEST(Parenthesis,multiple_parenthesis){
@@ -318,7 +317,6 @@ TEST(Parenthesis,multiple_parenthesis){
 	tokenizer tokens(input,delimiters);
 	Base * result = Parse(tokens,tokens.begin(),false);
      	result->execute();
-
         assert(oss && oss.str() == ("A \n B \n C \n"));
         std::cout << oss.str();
 }
